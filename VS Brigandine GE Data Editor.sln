@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29111.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VS Brigandine GE Data Editor", "VS Brigandine GE Data Editor\VS Brigandine GE Data Editor.csproj", "{5E0D4F09-A38C-41F5-BA84-9D7F0517977B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Brigandine GE PS1 Data Viewer", "..\Brigandine GE PS1 Game Data Viewer\Brigandine GE PS1 Data Viewer\Brigandine GE PS1 Data Viewer.csproj", "{A0D31B10-9955-4093-884F-62F86150BA9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A7A0507-DD15-4355-85DA-AA59154224A5}"
+	ProjectSection(SolutionItems) = preProject
+		SLPS_026 = SLPS_026
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E0D4F09-A38C-41F5-BA84-9D7F0517977B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E0D4F09-A38C-41F5-BA84-9D7F0517977B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E0D4F09-A38C-41F5-BA84-9D7F0517977B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E0D4F09-A38C-41F5-BA84-9D7F0517977B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0D31B10-9955-4093-884F-62F86150BA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0D31B10-9955-4093-884F-62F86150BA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0D31B10-9955-4093-884F-62F86150BA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0D31B10-9955-4093-884F-62F86150BA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96A9728E-89D2-47D5-80FC-A320FDE3331B}
+	EndGlobalSection
+EndGlobal
