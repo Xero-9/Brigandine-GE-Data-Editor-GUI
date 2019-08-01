@@ -29,10 +29,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
         public string Name
         {
-            get => memoryAccessor.DereferenceString(itemData.Name);
+            get => $"{memoryAccessor.DereferenceString(itemData.Name)}";
             //set => SetAndNotifyIfChanged(ref attackData.Name, value);
         }
-
+        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(itemData.Name):X}";
         public ItemTypeEnum Type
         {
             get => itemData.Type;

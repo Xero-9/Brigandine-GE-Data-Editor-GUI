@@ -25,13 +25,14 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
         public string Name
         {
-            get => memoryAccessor.DereferenceString(specialAttackData.Name);
+            get => $"{memoryAccessor.DereferenceString(specialAttackData.Name)}";
             //set => SetAndNotifyIfChanged(ref attackData.Name, value);
         }
-
+        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(specialAttackData.Name):X}";
         public string Description
         {
-            get => memoryAccessor.DereferenceString(specialAttackData.Description);
+            get =>
+                $"{memoryAccessor.DereferenceString(specialAttackData.Description)} at {MemoryAccessor.AdjustAddress(specialAttackData.Description):X}";
             //set => SetAndNotifyIfChanged(ref SpecialAttackData.Description, value);
         }
 

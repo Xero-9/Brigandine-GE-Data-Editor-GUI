@@ -9,12 +9,12 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
 
         public MonsterInSummonDataViewModel(ref MonsterInSummonData data, MemoryAccessor memoryAccessor)
         {
-            MonsterInSummonData = data;
+            monsterInSummonData = data;
             this.memoryAccessor = memoryAccessor;
         }
 
         private MemoryAccessor      memoryAccessor;
-        private MonsterInSummonData MonsterInSummonData;
+        private MonsterInSummonData monsterInSummonData;
 
         public override string ToString()
         {
@@ -24,62 +24,62 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
         public string Name
         {
-            get => memoryAccessor.DereferenceString(MonsterInSummonData.Name);
+            get => $"{memoryAccessor.DereferenceString(monsterInSummonData.Name)}";
             //set => SetAndNotifyIfChanged(ref attackData.Name, value);
         }
-
+        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(monsterInSummonData.Name):X}";
         public byte Level
         {
-            get => MonsterInSummonData.Level;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Level, value);
+            get => monsterInSummonData.Level;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.Level, value);
         }
 
         public byte Exp
         {
-            get => MonsterInSummonData.Exp;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Exp, value);
+            get => monsterInSummonData.Exp;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.Exp, value);
         }
 
         public ushort BaseHP
         {
-            get => MonsterInSummonData.BaseHP;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.BaseHP, value);
+            get => monsterInSummonData.BaseHP;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.BaseHP, value);
         }
 
         public ushort BashMP
         {
-            get => MonsterInSummonData.BaseMP;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.BaseMP, value);
+            get => monsterInSummonData.BaseMP;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.BaseMP, value);
         }
 
         public byte Str
         {
-            get => MonsterInSummonData.Str;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Str, value);
+            get => monsterInSummonData.Str;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.Str, value);
         }
 
         public byte Int
         {
-            get => MonsterInSummonData.Int;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Int, value);
+            get => monsterInSummonData.Int;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.Int, value);
         }
 
         public byte Agi
         {
-            get => MonsterInSummonData.Hit;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Hit, value);
+            get => monsterInSummonData.Hit;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.Hit, value);
         }
 
         public byte RuneCost
         {
-            get => MonsterInSummonData.RuneCost;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.RuneCost, value);
+            get => monsterInSummonData.RuneCost;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.RuneCost, value);
         }
 
         public ushort ManaCost
         {
-            get => MonsterInSummonData.ManaCost;
-            set => SetAndNotifyIfChanged(ref MonsterInSummonData.ManaCost, value);
+            get => monsterInSummonData.ManaCost;
+            set => SetAndNotifyIfChanged(ref monsterInSummonData.ManaCost, value);
         }
     }
 }

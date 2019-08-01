@@ -25,10 +25,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         ////TODO Create special string like control type for handling getting and setting strings from memory accessor.
         public string Name
         {
-            get => memoryAccessor.DereferenceString(monsterData.Name);
+            get => $"{memoryAccessor.DereferenceString(monsterData.Name)}";
             //set => SetAndNotifyIfChanged(ref MonsterDataView.Name, value);
         }
-
+        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(monsterData.Name):X}";
         public OwnerEnum Owner
         {
             get => monsterData.Owner;

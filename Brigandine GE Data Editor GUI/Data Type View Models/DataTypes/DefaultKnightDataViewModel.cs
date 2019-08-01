@@ -14,12 +14,12 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         }
         public DefaultKnightDataViewModel(ref unsafeDefaultKnightData data, MemoryAccessor memoryAccessor)
         {
-            classData          = data;
+            defaultKnightData          = data;
             this.memoryAccessor = memoryAccessor;
         }
 
         private MemoryAccessor memoryAccessor;
-        private unsafeDefaultKnightData classData;
+        private unsafeDefaultKnightData defaultKnightData;
 
         public override string ToString()
         {
@@ -29,75 +29,75 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
         public string Name
         {
-            get => memoryAccessor.DereferenceString(classData.Name);
+            get => $"{memoryAccessor.DereferenceString(defaultKnightData.Name)}";
             //set => SetAndNotifyIfChanged(ref attackData.Name, value);
         }
-
+        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(defaultKnightData.Name):X}";
         public byte Class
         {
-            get => classData.Class;
-            set => SetAndNotifyIfChanged(ref classData.Class, value);
+            get => defaultKnightData.Class;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Class, value);
         }
 
         public byte Level
         {
-            get => classData.Level;
-            set => SetAndNotifyIfChanged(ref classData.Level, value);
+            get => defaultKnightData.Level;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Level, value);
         }
 
         public ushort XP
         {
-            get => classData.XP;
+            get => defaultKnightData.XP;
             
-            set => SetAndNotifyIfChanged(ref classData.XP, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.XP, value);
         }
 
         public ushort HP
         {
-            get => classData.HP;
+            get => defaultKnightData.HP;
             
-            set => SetAndNotifyIfChanged(ref classData.HP, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.HP, value);
         }
 
         public ushort MP
         {
-            get => classData.MP;
-            set => SetAndNotifyIfChanged(ref classData.MP, value);
+            get => defaultKnightData.MP;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.MP, value);
         }
 
         public byte STR
         {
-            get => classData.STR;
+            get => defaultKnightData.STR;
             
-            set => SetAndNotifyIfChanged(ref classData.STR, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.STR, value);
         }
 
         public byte INT
         {
-            get => classData.INT;
+            get => defaultKnightData.INT;
             
-            set => SetAndNotifyIfChanged(ref classData.INT, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.INT, value);
         }
 
         public byte AGI
         {
-            get => classData.AGI;
+            get => defaultKnightData.AGI;
             
-            set => SetAndNotifyIfChanged(ref classData.AGI, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.AGI, value);
         }
 
         public byte RunePwrGrowth_RuneArea
         {
-            get => classData.RunePwrGrowth_RuneArea;
+            get => defaultKnightData.RunePwrGrowth_RuneArea;
             
-            set => SetAndNotifyIfChanged(ref classData.RunePwrGrowth_RuneArea, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.RunePwrGrowth_RuneArea, value);
         }
 
         public ushort RunePwr
         {
-            get => classData.RunePwr;
+            get => defaultKnightData.RunePwr;
             
-            set => SetAndNotifyIfChanged(ref classData.RunePwr, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.RunePwr, value);
         }
 
         private uint[ ] monsters = null;
@@ -112,7 +112,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
                         monsters = new uint[7];
                         for (int i = 0; i < monsters.Length; i++)
                         {
-                            monsters[i] = classData.Monsters[i];
+                            monsters[i] = defaultKnightData.Monsters[i];
                         }
                     }
                 }
@@ -123,40 +123,40 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
 
         public byte StartingClass
         {
-            get => classData.StartingClass;
+            get => defaultKnightData.StartingClass;
 
-            set => SetAndNotifyIfChanged(ref classData.StartingClass, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.StartingClass, value);
         }
 
         public byte Weapon
         {
             
-            get => classData.Weapon;
+            get => defaultKnightData.Weapon;
 
-            set => SetAndNotifyIfChanged(ref classData.Weapon, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Weapon, value);
         }
         public byte Item
         {
             
-            get => classData.Item;
+            get => defaultKnightData.Item;
 
-            set => SetAndNotifyIfChanged(ref classData.Item, value);
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Item, value);
         }
         public int Unknown
         {
 
-            get => classData.Unk;
-            set => SetAndNotifyIfChanged(ref classData.Unk, value);
+            get => defaultKnightData.Unk;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Unk, value);
         }
         public byte Team
         {
-            get => classData.Team;
-            set => SetAndNotifyIfChanged(ref classData.Team, value);
+            get => defaultKnightData.Team;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Team, value);
         }
         public byte Town
         {
-            get => classData.Town;
-            set => SetAndNotifyIfChanged(ref classData.Town, value);
+            get => defaultKnightData.Town;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Town, value);
         }
         
     }

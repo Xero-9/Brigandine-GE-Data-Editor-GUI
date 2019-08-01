@@ -8,10 +8,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
     {
         public abstract string Name { get; }
         public abstract BaseDataTypeViewModel CurrentSelectedDataProperty { get; set; }
-        public override string ToString()
-        {
-            return Name;
-        }
+        //public override string ToString()
+        //{
+        //    return Name;
+        //}
     }
 
         public class DataTypeCollectionViewModel<TDataTypeViewModel> : BaseDataTypeCollectionViewModel

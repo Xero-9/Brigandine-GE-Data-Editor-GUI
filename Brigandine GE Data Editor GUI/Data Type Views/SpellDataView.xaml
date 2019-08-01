@@ -15,7 +15,7 @@
         <StackPanel Grid.Column="0">
             <StackPanel Orientation="Horizontal">
                 <Label Content="Name: " />
-                <Label Content="{Binding Name}" />
+                <Label Content="{Binding NameWithAddress}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Description: " />
