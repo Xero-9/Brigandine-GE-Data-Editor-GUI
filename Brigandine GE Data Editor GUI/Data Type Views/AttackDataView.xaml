@@ -1,0 +1,72 @@
+﻿<UserControl x:Class = "BrigandineGEDataEditorGUI.Data_Type_Views.AttackDataView"
+             xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d = "http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
+             mc:Ignorable = "d" d:DesignHeight = "450" d:DesignWidth = "250" >
+    <Grid
+        d:DataContext = "{d:DesignInstance d:Type=dataTypeViewModels:AttackDataViewModel, IsDesignTimeCreatable=True}" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <StackPanel Grid.Column = "0">
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Name: " />
+                <Label Content = "{Binding Path=Name}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Description: " />
+                <Label Content = "{Binding Path=Description}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Hit: " />
+                <Label Content = "{Binding Path=Name}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "RangeMin: " />
+                <Label Content = "{Binding Path=RangeMin}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "RangeMax: " />
+                <Label Content = "{Binding Path=RangeMax}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Damage: " />
+                <Label Content = "{Binding Path=Damage}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Element: " />
+                <Label Content = "{Binding Path=Element}" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column = "1" >
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "GroundAndSky: " />
+                <Label Content = "{Binding Path=GroundOrSky}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Unk: " />
+                <Label Content = "{Binding Path=Unk}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "UsableAfterMove: " />
+                <Label Content = "{Binding Path=UsableAfterMove}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Unk5: " />
+                <Label Content = "{Binding Path=Unk5}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Unk6: " />
+                <Label Content = "{Binding Path=Unk6}" />
+            </StackPanel>
+            <StackPanel Orientation = "Horizontal" >
+                <Label Content = "Unk7: " />
+                <Label Content = "{Binding Path=Unk7}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

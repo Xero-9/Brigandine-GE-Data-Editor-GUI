@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="BrigandineGEDataEditorGUI.Data_Type_Views.ClassDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid d:DataContext="{d:DesignInstance d:Type=dataTypeViewModels:ClassDataViewModel, IsDesignTimeCreatable=True}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Name: " />
+                <Label Content="{Binding Name}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Move: " />
+                <Label Content="{Binding Move}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="MoveType: " />
+                <Label Content="{Binding MoveType}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Defense: " />
+                <Label Content="{Binding Defense}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Attacks.PrimaryAttack: " />
+                <Label Content="{Binding Attacks.PrimaryAttack}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Attacks.SecondaryAttack: " />
+                <Label Content="{Binding Attacks.SecondaryAttack}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Attacks.SecondaryAttack2: " />
+                <Label Content="{Binding Attacks.SecondaryAttack2}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SpecialAttacks.FirstAttack: " />
+                <Label Content="{Binding SpecialAttacks.FirstAttack}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SpecialAttacks.SecondAttack: " />
+                <Label Content="{Binding SpecialAttacks.SecondAttack}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="MagicWB: " />
+                <Label Content="{Binding MagicWB}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="MagicBR: " />
+                <Label Content="{Binding MagicBR}" />
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="MagicRB: " />
+                <Label Content="{Binding MagicRB}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="MagicG: " />
+                <Label Content="{Binding MagicG}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Skills.FirstSkill: " />
+                <Label Content="{Binding Skills.FirstSkill}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Skills.SecondSkill: " />
+                <Label Content="{Binding Skills.SecondSkill}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Element: " />
+                <Label Content="{Binding Element}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Add_HP: " />
+                <Label Content="{Binding Add_HP}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Add_MP: " />
+                <Label Content="{Binding Add_MP}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Focus: " />
+                <Label Content="{Binding Focus}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Star: " />
+                <Label Content="{Binding Star}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="ExpRequiredToLvl: " />
+                <Label Content="{Binding ExpRequiredToLvl}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Unknown: " />
+                <Label Content="{Binding Unknown}" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
