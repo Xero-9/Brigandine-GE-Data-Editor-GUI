@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A7A0507-DD15-4355-85DA-AA59154224A5}"
 	ProjectSection(SolutionItems) = preProject
 		SLPS_026 = SLPS_026
+		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brigandine GE Data Editor GUI", "Brigandine GE Data Editor GUI\Brigandine GE Data Editor GUI.csproj", "{5E0D4F09-A38C-41F5-BA84-9D7F0517977B}"
