@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using BrigandineGEDataEditor;
+﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditor.Enums;
 using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
@@ -12,8 +11,9 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         {
             itemData.Type = ItemTypeEnum.Amulet;
         }
-        public ItemDataViewModel (ref ItemData data, MemoryAccessor memoryAccessor)
+        public ItemDataViewModel (ref ItemData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             itemData          = data;
             this.memoryAccessor = memoryAccessor;
         }
@@ -30,7 +30,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         public string Name
         {
             get => $"{memoryAccessor.DereferenceString(itemData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(itemData.Name):X}";
         public ItemTypeEnum Type
@@ -110,5 +110,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             get => itemData.ResistElement.GetElements();
             //set => SetAndNotifyIfChanged(ref itemData.ResistElement, value);
         }
+
+        public override int Address { get; }
     }
 }

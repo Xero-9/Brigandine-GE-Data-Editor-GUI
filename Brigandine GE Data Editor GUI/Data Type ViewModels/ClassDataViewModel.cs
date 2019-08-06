@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using BrigandineGEDataEditor;
+﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditor.Enums;
 using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
@@ -12,14 +11,15 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         {
             
         }
-        public ClassDataViewModel(ref unsafeClassData data, MemoryAccessor memoryAccessor)
+        public ClassDataViewModel(ref ClassData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             classData          = data;
             this.memoryAccessor = memoryAccessor;
         }
 
         private MemoryAccessor memoryAccessor;
-        private unsafeClassData     classData;
+        private ClassData     classData;
 
         public override string ToString()
         {
@@ -30,7 +30,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         public string Name
         {
             get => $"{memoryAccessor.DereferenceString(classData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(classData.Name):X}";
         public byte Move
@@ -39,7 +39,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref classData.Move, value);
         }
 
-        public MoveType MoveType
+        public MoveTypeEnum MoveType
         {
             get => classData.MoveType;
             set => SetAndNotifyIfChanged(ref classData.MoveType, value);
@@ -52,52 +52,58 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref classData.Defense, value);
         }
 
-        public Attacks Attacks
+        public AttackEnum PrimaryAttack
         {
-            get => classData.Attacks;
+            get => classData.Attacks.PrimaryAttack;
             
-            set => SetAndNotifyIfChanged(ref classData.Attacks, value);
+            set => SetAndNotifyIfChanged(ref classData.Attacks.primaryAttack, value);
+        }
+        public AttackEnum SecondaryAttack
+        {
+            get => classData.Attacks.SecondaryAttack;
+            
+            set => SetAndNotifyIfChanged(ref classData.Attacks.secondaryAttack, value);
+        }
+        public AttackEnum SecondaryAttack2
+        {
+            get => classData.Attacks.SecondaryAttack2;
+            
+            set => SetAndNotifyIfChanged(ref classData.Attacks.secondaryAttack2, value);
         }
 
-        public SpecialAttacks SpecialAttacks
+        public ClassData.SpecialAttack SpecialAttacks
         {
             get => classData.SpecialAttacks;
             set => SetAndNotifyIfChanged(ref classData.SpecialAttacks, value);
         }
-
-        public byte MagicWB
+        public SpecialAttacksEnum FirstAttack
         {
-            get => classData.MagicWB;
+            get => classData.SpecialAttacks.FirstAttack;
+            set => SetAndNotifyIfChanged(ref classData.SpecialAttacks.firstAttack, value);
+        }
+        public SpecialAttacksEnum SecondAttack
+        {
+            get => classData.SpecialAttacks.SecondAttack;
+            set => SetAndNotifyIfChanged(ref classData.SpecialAttacks.secondAttack, value);
+        }
+        public MagicEnum Spells
+        {
+            get => classData.Spells;
             
-            set => SetAndNotifyIfChanged(ref classData.MagicWB, value);
+            set => SetAndNotifyIfChanged(ref classData.Spells, value);
         }
 
-        public byte MagicBR
+        public FighterSkillEnum FirstSkill
         {
-            get => classData.MagicBR;
+            get => classData.Skills.FirstSkill;
             
-            set => SetAndNotifyIfChanged(ref classData.MagicBR, value);
+            set => SetAndNotifyIfChanged(ref classData.Skills.firstSkill, value);
         }
-
-        public byte MagicRB
+        public FighterSkillEnum SecondSkill
         {
-            get => classData.MagicRB;
+            get => classData.Skills.SecondSkill;
             
-            set => SetAndNotifyIfChanged(ref classData.MagicRB, value);
-        }
-
-        public byte MagicG
-        {
-            get => classData.MagicG;
-            
-            set => SetAndNotifyIfChanged(ref classData.MagicG, value);
-        }
-
-        public Skills Skills
-        {
-            get => classData.Skills;
-            
-            set => SetAndNotifyIfChanged(ref classData.Skills, value);
+            set => SetAndNotifyIfChanged(ref classData.Skills.secondSill, value);
         }
 
         public Elements Element
@@ -151,7 +157,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
                         unknown = new uint[5];
                         for (int i = 0; i < unknown.Length; i++)
                         {
-                            unknown[i] = classData.Unkown[i];
+                            unknown[i] = classData.Unknowns[i];
                         }
                     }
                 }
@@ -159,5 +165,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             }
             set => SetAndNotifyIfChanged(ref unknown, value);
         }
+
+        public override int Address { get; }
     }
 }

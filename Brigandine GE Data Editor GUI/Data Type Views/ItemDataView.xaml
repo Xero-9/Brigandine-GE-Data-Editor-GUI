@@ -3,76 +3,34 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
+             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
+             xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
+             xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid d:DataContext="{d:DesignInstance d:Type=dataTypeViewModels:ItemDataViewModel, IsDesignTimeCreatable=True}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Name: " />
-                <Label Content="{Binding NameWithAddress}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Type: " />
-                <Label Content="{Binding Type}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="AttackStr: " />
-                <Label Content="{Binding AttackStr}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Int: " />
-                <Label Content="{Binding Int}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Hit: " />
-                <Label Content="{Binding Hit}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="AvoidAgi: " />
-                <Label Content="{Binding AvoidAgi}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="DefShieldBlock: " />
-                <Label Content="{Binding DefShieldBlock}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="HP: " />
-                <Label Content="{Binding HP}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MP: " />
-                <Label Content="{Binding MP}" />
-            </StackPanel>
-            
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MoveUp: " />
-                <Label Content="{Binding MoveUp}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="RunePowerRuneCost: " />
-                <Label Content="{Binding RunePowerRuneCost}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="RuneArea: " />
-                <Label Content="{Binding RuneArea}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="AttackElements: " />
-                <Label Content="{Binding AttackElements}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="ResistElements: " />
-                <Label Content="{Binding ResistElements}" />
-            </StackPanel>
-        </StackPanel>
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+
+    <Grid  Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type brigandineGeDataEditorGui:MainWindow}}}"
+           d:DataContext="{d:DesignInstance d:Type=dataTypeHeaderViewModels:ItemDataHeaderViewModel, IsDesignTimeCreatable=True}">
+        <DataGrid AutoGenerateColumns="False" ItemsSource = "{Binding DataTypeCollectionViewModel}" 
+                  AlternationCount = "{Binding DataTypeCollectionViewModel.Count}">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, StringFormat=X}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
+                <DataGridTextColumn Header="AttackStr" Binding="{Binding AttackStr}" />
+                <DataGridTextColumn Header="Int" Binding="{Binding Int}" />
+                <DataGridTextColumn Header="Hit" Binding="{Binding Hit}" />
+                <DataGridTextColumn Header="AvoidAgi" Binding="{Binding AvoidAgi}" />
+                <DataGridTextColumn Header="DefShieldBlock" Binding="{Binding DefShieldBlock}" />
+                <DataGridTextColumn Header="HP" Binding="{Binding HP}" />
+                <DataGridTextColumn Header="MP" Binding="{Binding MP}" />
+                <DataGridTextColumn Header="MoveUp" Binding="{Binding MoveUp}" />
+                <DataGridTextColumn Header="RunePowerRuneCost" Binding="{Binding RunePowerRuneCost}" />
+                <DataGridTextColumn Header="RuneArea" Binding="{Binding RuneArea}" />
+                <DataGridTextColumn Header="AttackElements" Binding="{Binding AttackElements}" />
+                <DataGridTextColumn Header="ResistElements" Binding="{Binding ResistElements}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

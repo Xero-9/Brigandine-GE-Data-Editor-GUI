@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
 using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditor.Enums;
@@ -12,9 +12,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         {
             
         }
-        public AttackDataViewModel(ref AttackData data, MemoryAccessor memoryAccessor)
+        public AttackDataViewModel(ref AttackData data, MemoryAccessor memoryAccessor, int address)
         {
             attackData          = data;
+            Address = address;
             this.memoryAccessor = memoryAccessor;
         }
 
@@ -36,7 +37,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(attackData.Name):X}";
         public string Description
         {
-            get => $"{memoryAccessor.DereferenceString(attackData.Description)} at {MemoryAccessor.AdjustAddress(attackData.Description):X}";
+            get => $"{memoryAccessor.DereferenceString(attackData.Description)}";
             //set => SetAndNotifyIfChanged(ref description, value);
         }
 
@@ -76,10 +77,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref attackData.GroundOrSky, value);
         }
 
-        public byte Unk
+        public byte Unknown
         {
-            get => attackData.Unk;
-            set => SetAndNotifyIfChanged(ref attackData.Unk, value);
+            get => attackData.Unknown1;
+            set => SetAndNotifyIfChanged(ref attackData.Unknown1, value);
         }
 
         public byte UsableAfterMove
@@ -88,22 +89,20 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref attackData.UsableAfterMove, value);
         }
 
-        public byte Unk5
+        public byte[] Unknowns
         {
-            get => attackData.Unk5;
-            set => SetAndNotifyIfChanged(ref attackData.Unk5, value);
+            get
+            {
+                var bytes = new byte[3];
+                for (int i = 0; i < 3; i++)
+                {
+                    bytes[i] = attackData.Unknowns[i];
+                }
+
+                return bytes;
+            }
         }
 
-        public byte Unk6
-        {
-            get => attackData.Unk6;
-            set => SetAndNotifyIfChanged(ref attackData.Unk6, value);
-        }
-
-        public byte Unk7
-        {
-            get => attackData.Unk7;
-            set => SetAndNotifyIfChanged(ref attackData.Unk7, value);
-        }
+        public override int Address { get; }
     }
 }

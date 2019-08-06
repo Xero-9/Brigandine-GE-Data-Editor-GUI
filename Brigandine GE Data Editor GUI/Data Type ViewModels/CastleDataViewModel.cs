@@ -11,14 +11,15 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         {
             
         }
-        public CastleDataViewModel(ref unsafeCastleData data, MemoryAccessor memoryAccessor)
+        public CastleDataViewModel(ref CastleData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             castleData = data;
             this.memoryAccessor = memoryAccessor;
         }
 
         private MemoryAccessor   memoryAccessor;
-        private unsafeCastleData castleData;
+        private CastleData castleData;
 
         public override string ToString()
         {
@@ -29,7 +30,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         public string Name
         {
             get => $"{memoryAccessor.DereferenceString(castleData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(castleData.Name):X}";
         public byte MovesFlag
@@ -37,9 +38,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             get => castleData.MovesFlag;
             set => SetAndNotifyIfChanged(ref castleData.MovesFlag, value);
         }
-
         private byte[ ] castlesConnectedTo = null;
-
         public byte[ ] CastlesConnectedTo
         {
             get
@@ -67,10 +66,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref castleData.PrefixForCity, value);
         }
 
-        public OwnerEnum Owner
+        public CountryEnum Country
         {
-            get => castleData.Owner;
-            set => SetAndNotifyIfChanged(ref castleData.Owner, value);
+            get => castleData.Country;
+            set => SetAndNotifyIfChanged(ref castleData.Country, value);
         }
 
         public ushort ManaPerMonth
@@ -93,7 +92,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
                         monstersThatCanBeSummoned = new byte[16];
                         for (int i = 0; i < monstersThatCanBeSummoned.Length; i++)
                         {
-                            monstersThatCanBeSummoned[i] = castleData.MonstersThatCanBeSummoned[i];
+                            monstersThatCanBeSummoned[i] = castleData.MonsterCanSummon[i];
                         }
                     }
                 }
@@ -103,5 +102,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             //set => SetAndNotifyIfChanged(ref castleData.monstersThatCanBeSummoned, value);
 
         }
+
+        public override int Address { get; }
     }
 }

@@ -3,91 +3,92 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
              xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
+             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
+             xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
+             xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid
-        d:DataContext="{d:DesignInstance d:Type=dataTypeViewModels:DefaultKnightDataViewModel, IsDesignTimeCreatable=True}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-           <StackPanel Orientation="Horizontal">
-                <Label Content="Name: " />
-                <Label Content="{Binding NameWithAddress}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Class: " />
-                <Label Content="{Binding Class}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Level: " />
-                <Label Content="{Binding Level}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="XP: " />
-                <Label Content="{Binding XP}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="HP: " />
-                <Label Content="{Binding HP}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MP: " />
-                <Label Content="{Binding MP}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="STR: " />
-                <Label Content="{Binding STR}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="INT: " />
-                <Label Content="{Binding INT}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="AGI: " />
-                <Label Content="{Binding AGI}" />
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="RunePwrGrowth_RuneArea: " />
-                <Label Content="{Binding RunePwrGrowth_RuneArea}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="RunePwr: " />
-                <Label Content="{Binding RunePwr}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Monsters: " />
-                <Label Content="{Binding Monsters}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="StartingClass: " />
-                <Label Content="{Binding StartingClass}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Weapon: " />
-                <Label Content="{Binding Weapon}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Item: " />
-                <Label Content="{Binding Item}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Unknown: " />
-                <Label Content="{Binding Unknown}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Team: " />
-                <Label Content="{Binding Team}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Town: " />
-                <Label Content="{Binding Town}" />
-            </StackPanel>
-        </StackPanel>
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+
+    <Grid d:DataContext="{d:DesignInstance d:Type=dataTypeHeaderViewModels:DefaultKnightHeaderViewModel, IsDesignTimeCreatable=True}"
+        Width = "{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type brigandineGeDataEditorGui:MainWindow}}}"
+        >
+        <DataGrid AutoGenerateColumns = "False"
+                  ItemsSource = "{Binding DataTypeCollectionViewModel}"
+                  AlternationCount = "{Binding DataTypeCollectionViewModel.Count}">
+            <DataGrid.Columns >
+                <!--<DataGridTextColumn Header = "Address" Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=(ItemsControl.AlternationIndex)}" />-->
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, StringFormat=X}"/>
+                <DataGridTextColumn Header = "Name" Binding = "{Binding Name}" />
+                <DataGridTextColumn Header = "Class" Binding = "{Binding Class}" />
+                <DataGridTextColumn Header = "Level" Binding = "{Binding Level}" />
+                <DataGridTextColumn Header = "XP" Binding = "{Binding XP}" />
+                <DataGridTextColumn Header = "HP" Binding = "{Binding HP}" />
+                <DataGridTextColumn Header = "MP" Binding = "{Binding MP}" />
+                <DataGridTextColumn Header = "STR" Binding = "{Binding STR}" />
+                <DataGridTextColumn Header = "INT" Binding = "{Binding INT}" />
+                <DataGridTextColumn Header = "AGI" Binding = "{Binding AGI}" />
+                <DataGridTextColumn Header = "RunePwrGrowthRuneArea" Binding = "{Binding RunePwrGrowth_RuneArea}" />
+                <DataGridTextColumn Header = "RunePwr" Binding = "{Binding RunePwr}" />
+                <DataGridTemplateColumn Header = "Monsters">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Monsters, StringFormat=X}" >
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header = "Country" Binding = "{Binding Country}" />
+                <DataGridTextColumn Header = "Town" Binding = "{Binding Castle}"  />
+                <DataGridTemplateColumn Header = "Unknown1">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Unknown1}" >
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header = "Unknown2">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Unknown2}" >
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header = "Unknown3">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding Unknown3}" >
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                 <DataGridTextColumn Header="Unknown4" Binding="{Binding Unknown4}" />
+                <DataGridTextColumn Header="Unknown5" Binding="{Binding Unknown5}" />
+                 
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -5,67 +5,66 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
-    xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
-    xmlns:local="clr-namespace:BrigandineGEDataEditorGUI" x:Class="BrigandineGEDataEditorGUI.MainWindow"
+    xmlns:local="clr-namespace:BrigandineGEDataEditorGUI"
+    xmlns:dataTypeHeaderViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
+    x:Class="BrigandineGEDataEditorGUI.MainWindow"
     mc:Ignorable="d"
     Title="Brigandine Grand Edition Data Editor" Height="450" Width="800">
 
     <Window.Resources>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:BaseDataTypeCollectionViewModel}">
-            <dataTypeViews:DataTypeCollectionView />
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:AttackDataHeaderViewModel}">
+            <dataTypeViews:AttackDataView></dataTypeViews:AttackDataView>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:AttackDataViewModel}">
-            <dataTypeViews:AttackDataView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:CastleDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:CastleDataHeaderViewModel}">
             <dataTypeViews:CastleDataView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:ClassDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:ClassDataHeaderViewModel}">
             <dataTypeViews:ClassDataView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:ItemDataViewModel}">
-            <dataTypeViews:ItemDataView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:DefaultKnightDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:DefaultKnightHeaderViewModel}">
             <dataTypeViews:DefaultKnightDataView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:MonsterInSummonDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:ItemDataHeaderViewModel}">
+            <dataTypeViews:ItemDataView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:MonsterInSummonDataHeaderViewModel}">
             <dataTypeViews:MonsterInSummonDataView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:SkillDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:SkillDataHeaderViewModel}">
             <dataTypeViews:SkillDataView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:SpecialAttackDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:SpecialAttackDataHeaderViewModel}">
             <dataTypeViews:SpecialAttackDataView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:SpellDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:SpellDataHeaderViewModel}">
             <dataTypeViews:SpellDataView />
         </DataTemplate>
+
         <!-- Work in Progress -->
-        <DataTemplate DataType="{x:Type dataTypeViewModels:StatGrowthDataViewModel}">
-            <dataTypeViews:StatGrowthDataView />
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeViewModels:MonsterDataViewModel}">
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:MonsterDataHeaderViewModel}">
             <dataTypeViews:MonsterDataView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:StatGrowthDataHeaderViewModel}">
+            <dataTypeViews:StatGrowthDataView />
         </DataTemplate>
     </Window.Resources>
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Closing">
+    <i:Interaction.Triggers >
+        <i:EventTrigger EventName="Closing" >
             <i:InvokeCommandAction Command="{Binding OnCloseCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
     <Grid
-        d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type dataTypeViewModels:MainWindowViewModel}}">
+        d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type local:MainWindowViewModel}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <ListView ItemsSource="{Binding DataTypeViewModels}"
-                      SelectedItem="{Binding SelectedDataTypeViewModelCollection}">
+            <ListView Grid.Row="0" ItemsSource="{Binding DataTypeHeaderViewModel}"
+                      SelectedItem="{Binding SelectedBaseDataTypeHeaderViewModel}">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"
@@ -79,13 +78,11 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <ContentControl Content="{Binding SelectedDataTypeViewModelCollection}" />
-            <ContentControl Content="{Binding SelectedDataTypeViewModelCollection.CurrentSelectedDataProperty}" />
-        </StackPanel>
+        <ContentControl Grid.Row="1" Content="{Binding SelectedBaseDataTypeHeaderViewModel}" />
         <StackPanel Orientation="Horizontal" Grid.Row="2">
             <Button x:Name="OpenFile" Content="Open File" Command="{Binding OpenFileCommand}" />
             <Button x:Name="LoadAndReadFile" Content="Load And Read File" Command="{Binding LoadAndReadFileCommand}" />
+            <Button IsEnabled="False" x:Name="SaveAs" Content="Save As" Command="{Binding SaveAsCommand}" ToolTip="Not supported yet." />
         </StackPanel>
     </Grid>
 

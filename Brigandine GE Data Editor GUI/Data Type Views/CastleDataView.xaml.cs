@@ -11,11 +11,5 @@ namespace BrigandineGEDataEditorGUI.Data_Type_Views
         {
             InitializeComponent();
         }
-
-        //public CastleDataView(AttackDataTypeViewModel attackDataTypeViewModel)
-        //{
-        //    InitializeComponent();
-        //    DataContext = attackDataTypeViewModel;
-        //}
     }
 }

@@ -8,14 +8,15 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
     {
         public SpellDataViewModel() { }
 
-        public SpellDataViewModel(ref unsafeSpellData data, MemoryAccessor memoryAccessor)
+        public SpellDataViewModel(ref SpellData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             spellData           = data;
             this.memoryAccessor = memoryAccessor;
         }
 
         private MemoryAccessor memoryAccessor;
-        private unsafeSpellData      spellData;
+        private SpellData      spellData;
 
         public override string ToString()
         {
@@ -26,12 +27,12 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         public string Name
         {
             get => $"{memoryAccessor.DereferenceString(spellData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(spellData.Name):X}";
         public string Description
         {
-            get => $"{memoryAccessor.DereferenceString(spellData.Description)} at {MemoryAccessor.AdjustAddress(spellData.Description):X}";
+            get => $"{memoryAccessor.DereferenceString(spellData.Description)}";
             //set => SetAndNotifyIfChanged(ref spellData.Description, value);
         }
 
@@ -88,7 +89,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
                         unknown = new byte[5];
                         for (int i = 0; i < unknown.Length; i++)
                         {
-                            unknown[i] = spellData.Unknown[i];
+                            unknown[i] = spellData.Unknowns[i];
                         }
                     }
                 }
@@ -96,5 +97,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             }
             set => SetAndNotifyIfChanged(ref unknown, value);
         }
+
+        public override int Address { get; }
     }
 }

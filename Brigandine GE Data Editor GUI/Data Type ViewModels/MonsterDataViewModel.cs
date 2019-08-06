@@ -8,8 +8,9 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
     {
         public MonsterDataViewModel() { }
 
-        public MonsterDataViewModel(ref MonsterData data, MemoryAccessor memoryAccessor)
+        public MonsterDataViewModel(ref MonsterData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             monsterData         = data;
             this.memoryAccessor = memoryAccessor;
         }
@@ -29,10 +30,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             //set => SetAndNotifyIfChanged(ref MonsterDataView.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(monsterData.Name):X}";
-        public OwnerEnum Owner
+        public CountryEnum Country
         {
-            get => monsterData.Owner;
-            set => SetAndNotifyIfChanged(ref monsterData.Owner, value);
+            get => monsterData.Country;
+            set => SetAndNotifyIfChanged(ref monsterData.Country, value);
         }
 
         public byte MonsterSlotNumber
@@ -88,5 +89,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             get => monsterData.ItemEquipped;
             set => SetAndNotifyIfChanged(ref monsterData.ItemEquipped, value);
         }
+
+        public override int Address { get; }
     }
 }

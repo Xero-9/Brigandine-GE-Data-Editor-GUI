@@ -3,109 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
+             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
+             xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
+             xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
-
-    <Grid d:DataContext="{d:DesignInstance d:Type=dataTypeViewModels:ClassDataViewModel, IsDesignTimeCreatable=True}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Name: " />
-                <Label Content="{Binding NameWithAddress}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Move: " />
-                <Label Content="{Binding Move}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MoveType: " />
-                <Label Content="{Binding MoveType}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Defense: " />
-                <Label Content="{Binding Defense}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Attacks.PrimaryAttack: " />
-                <Label Content="{Binding Attacks.PrimaryAttack}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Attacks.SecondaryAttack: " />
-                <Label Content="{Binding Attacks.SecondaryAttack}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Attacks.SecondaryAttack2: " />
-                <Label Content="{Binding Attacks.SecondaryAttack2}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="SpecialAttacks.FirstAttack: " />
-                <Label Content="{Binding SpecialAttacks.FirstAttack}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="SpecialAttacks.SecondAttack: " />
-                <Label Content="{Binding SpecialAttacks.SecondAttack}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MagicWB: " />
-                <Label Content="{Binding MagicWB}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MagicBR: " />
-                <Label Content="{Binding MagicBR}" />
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MagicRB: " />
-                <Label Content="{Binding MagicRB}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="MagicG: " />
-                <Label Content="{Binding MagicG}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Skills.FirstSkill: " />
-                <Label Content="{Binding Skills.FirstSkill}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Skills.SecondSkill: " />
-                <Label Content="{Binding Skills.SecondSkill}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Element: " />
-                <Label Content="{Binding Element}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Add_HP: " />
-                <Label Content="{Binding Add_HP}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Add_MP: " />
-                <Label Content="{Binding Add_MP}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Focus: " />
-                <Label Content="{Binding Focus}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Star: " />
-                <Label Content="{Binding Star}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="ExpRequiredToLvl: " />
-                <Label Content="{Binding ExpRequiredToLvl}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Unknown: " />
-                <Label Content="{Binding Unknown}" />
-            </StackPanel>
-        </StackPanel>
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+    
+    <Grid d:DataContext = "{d:DesignInstance d:Type=dataTypeHeaderViewModels:ClassDataHeaderViewModel, IsDesignTimeCreatable=True}">
+        <DataGrid AutoGenerateColumns = "False" ItemsSource = "{Binding DataTypeCollectionViewModel}" 
+                  AlternationCount = "{Binding DataTypeCollectionViewModel.Count}">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, StringFormat=X}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Move" Binding="{Binding Move}" />
+                <DataGridTextColumn Header="MoveType" Binding="{Binding MoveType}" />
+                <DataGridTextColumn Header="Defense" Binding="{Binding Defense}" />
+                <DataGridTextColumn Header="PrimaryAttack" Binding="{Binding PrimaryAttack}" />
+                <DataGridTextColumn Header="SecondaryAttack" Binding="{Binding SecondaryAttack}" />
+                <DataGridTextColumn Header="SecondaryAttack2" Binding="{Binding SecondaryAttack2}" />
+                <DataGridTextColumn Header="FirstSpecialAttack" Binding="{Binding FirstAttack}" />
+                <DataGridTextColumn Header="SecondSpecialAttack" Binding="{Binding SecondAttack}" />
+                <DataGridTextColumn Header="Magic" Binding="{Binding Spells}" />
+                <DataGridTextColumn Header="FirstSkill" Binding="{Binding  FirstSkill}" />
+                <DataGridTextColumn Header="SecondSkill" Binding="{Binding SecondSkill}" />
+                <DataGridTextColumn Header="Element" Binding="{Binding Element}" />
+                <DataGridTextColumn Header="AddHp" Binding="{Binding Add_HP}" />
+                <DataGridTextColumn Header="AddMp" Binding="{Binding Add_MP}" />
+                <DataGridTextColumn Header="Focus" Binding="{Binding Focus}" />
+                <DataGridTextColumn Header="Star" Binding="{Binding Star}" />
+                <DataGridTextColumn Header="ExpRequiredToLvl" Binding="{Binding ExpRequiredToLvl}" />
+                <DataGridTextColumn Header="Unknown" Binding="{Binding Unknown}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

@@ -1,5 +1,4 @@
 ﻿using System.Windows.Controls;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models;
 
 namespace BrigandineGEDataEditorGUI.Data_Type_Views
 {
@@ -11,12 +10,6 @@ namespace BrigandineGEDataEditorGUI.Data_Type_Views
         public AttackDataView()
         {
             InitializeComponent();
-        }
-
-        public AttackDataView(AttackDataViewModel attackDataViewModel)
-        {
-            InitializeComponent();
-            DataContext = attackDataViewModel;
         }
     }
 }

@@ -7,8 +7,9 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
     {
         public SkillDataViewModel() { }
 
-        public SkillDataViewModel(ref SkillData data, MemoryAccessor memoryAccessor)
+        public SkillDataViewModel(ref SkillData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             skillData           = data;
             this.memoryAccessor = memoryAccessor;
         }
@@ -25,13 +26,15 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         public string Name
         {
             get => $"{memoryAccessor.DereferenceString(skillData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(skillData.Name):X}";
         public string Description
         {
-            get => $"{memoryAccessor.DereferenceString(skillData.Description)} at {MemoryAccessor.AdjustAddress(skillData.Description):X}";
+            get => $"{memoryAccessor.DereferenceString(skillData.Description)}";
             //set => SetAndNotifyIfChanged(ref SkillData.Description, value);
         }
+
+        public override int Address { get; }
     }
 }

@@ -2,27 +2,23 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
+             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
+             xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
+             xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid d:DataContext="{d:DesignInstance d:Type=dataTypeViewModels:SkillDataViewModel, IsDesignTimeCreatable=True}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="0">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Name: " />
-                <Label Content="{Binding NameWithAddress}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Description: " />
-                <Label Content="{Binding Description}" />
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-        </StackPanel>
+    
+    <Grid  Width="{Binding ActualWidth, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type brigandineGeDataEditorGui:MainWindow}}}"
+           d:DataContext="{d:DesignInstance d:Type=dataTypeHeaderViewModels:SkillDataHeaderViewModel, IsDesignTimeCreatable=True}">
+        <DataGrid AutoGenerateColumns="False" ItemsSource = "{Binding DataTypeCollectionViewModel}" 
+                  AlternationCount = "{Binding DataTypeCollectionViewModel.Count}">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, StringFormat=X}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

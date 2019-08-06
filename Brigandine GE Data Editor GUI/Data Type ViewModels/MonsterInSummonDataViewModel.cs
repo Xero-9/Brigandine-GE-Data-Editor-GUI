@@ -7,8 +7,9 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
     {
         public MonsterInSummonDataViewModel() { }
 
-        public MonsterInSummonDataViewModel(ref MonsterInSummonData data, MemoryAccessor memoryAccessor)
+        public MonsterInSummonDataViewModel(ref MonsterInSummonData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             monsterInSummonData = data;
             this.memoryAccessor = memoryAccessor;
         }
@@ -25,7 +26,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         public string Name
         {
             get => $"{memoryAccessor.DereferenceString(monsterInSummonData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(monsterInSummonData.Name):X}";
         public byte Level
@@ -46,7 +47,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             set => SetAndNotifyIfChanged(ref monsterInSummonData.BaseHP, value);
         }
 
-        public ushort BashMP
+        public ushort BaseMP
         {
             get => monsterInSummonData.BaseMP;
             set => SetAndNotifyIfChanged(ref monsterInSummonData.BaseMP, value);
@@ -81,5 +82,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             get => monsterInSummonData.ManaCost;
             set => SetAndNotifyIfChanged(ref monsterInSummonData.ManaCost, value);
         }
+
+        public override int Address { get; }
     }
 }

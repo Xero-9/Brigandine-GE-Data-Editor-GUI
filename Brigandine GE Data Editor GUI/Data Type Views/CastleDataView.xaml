@@ -3,56 +3,49 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
-             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="250">
-
-    <StackPanel
-        d:DataContext="{d:DesignInstance d:Type=dataTypeViewModels:CastleDataViewModel, IsDesignTimeCreatable=True}">
-        <!--Special handling needed for editing names since they are pointers.-->
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Name: " />
-            <Label Content="{Binding Path=NameWithAddress}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="MovesFlag: " />
-            <Label Content="{Binding Path=MovesFlag}" />
-            <TextBox Text="{Binding Path=MovesFlag, Mode=TwoWay}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="CastlesConnectedTo: " />
-            <ListView ItemsSource="{Binding Path=CastlesConnectedTo}">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="PrefixForCity: " />
-            <Label Content="{Binding Path=PrefixForCity}" />
-            <TextBox Text="{Binding Path=PrefixForCity, Mode=TwoWay}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="Owner: " />
-            <Label Content="{Binding Path=Owner}" />
-            <TextBox Text="{Binding Path=Owner, Mode=TwoWay}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="ManaPerMonth: " />
-            <Label Content="{Binding Path=ManaPerMonth}" />
-            <TextBox Text="{Binding Path=ManaPerMonth, Mode=TwoWay}" />
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Label Content="MonstersThatCanBeSummoned: " />
-            <ListView ItemsSource="{Binding Path=MonstersThatCanBeSummoned}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ListView>
-        </StackPanel>
-    </StackPanel>
+             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
+             xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
+             xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+    <Grid d:DataContext = "{d:DesignInstance d:Type=dataTypeHeaderViewModels:CastleDataHeaderViewModel, IsDesignTimeCreatable=True}" >
+        <DataGrid AutoGenerateColumns="False" ItemsSource = "{Binding DataTypeCollectionViewModel}" 
+                  AlternationCount = "{Binding DataTypeCollectionViewModel.Count}">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Address" Binding="{Binding Address, StringFormat=X}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="MovesFlag"  Binding="{Binding MovesFlag}" />
+                <DataGridTemplateColumn Header="CastlesConnectedTo">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding CastlesConnectedTo}" >
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="PrefixForCity"  Binding="{Binding PrefixForCity}" />
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}" />
+                <DataGridTextColumn Header="ManaPerMonth" Binding="{Binding ManaPerMonth}" />
+                <DataGridTemplateColumn Header="MonstersThatCanBeSummoned">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ListView ItemsSource="{Binding MonstersThatCanBeSummoned}" >
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
 </UserControl>

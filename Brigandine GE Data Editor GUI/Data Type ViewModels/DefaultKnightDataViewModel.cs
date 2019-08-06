@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using BrigandineGEDataEditor;
+﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditor.Enums;
 using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
@@ -12,14 +11,15 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         {
             
         }
-        public DefaultKnightDataViewModel(ref unsafeDefaultKnightData data, MemoryAccessor memoryAccessor)
+        public DefaultKnightDataViewModel(ref DefaultKnightData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             defaultKnightData          = data;
             this.memoryAccessor = memoryAccessor;
         }
 
         private MemoryAccessor memoryAccessor;
-        private unsafeDefaultKnightData defaultKnightData;
+        private DefaultKnightData defaultKnightData;
 
         public override string ToString()
         {
@@ -27,13 +27,20 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         }
 
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
+        private string name;
         public string Name
         {
-            get => $"{memoryAccessor.DereferenceString(defaultKnightData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            get => $"{defaultKnightData.Name.GetText(memoryAccessor)}";
+            set
+            {
+                name = value;
+                defaultKnightData.Name.SetText(memoryAccessor, ref name);
+                    NotifyPropertyChanged(nameof(Name));
+            }
         }
+
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(defaultKnightData.Name):X}";
-        public byte Class
+        public ClassEnum Class
         {
             get => defaultKnightData.Class;
             set => SetAndNotifyIfChanged(ref defaultKnightData.Class, value);
@@ -100,64 +107,28 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref defaultKnightData.RunePwr, value);
         }
 
-        private uint[ ] monsters = null;
-        public uint[] Monsters
+        public byte[] Monsters
         {
-            get
-            {
-                unsafe
-                {
-                    if (monsters == null)
-                    {
-                        monsters = new uint[7];
-                        for (int i = 0; i < monsters.Length; i++)
-                        {
-                            monsters[i] = defaultKnightData.Monsters[i];
-                        }
-                    }
-                }
-                return monsters;
-            }
-            set => SetAndNotifyIfChanged(ref monsters, value);
+            get => defaultKnightData.Monsters.ToArray();
+            //set => SetAndNotifyIfChanged(ref defaultKnightData.Monsters, value);
         }
 
-        public byte StartingClass
+        public byte[] Unknown1 => defaultKnightData.Unknown1.ToArray();
+        public byte[] Unknown2 => defaultKnightData.Unknown2.ToArray();
+        public byte[] Unknown3 => defaultKnightData.Unknown3.ToArray();
+        public byte Unknown4 => defaultKnightData.Unknown4;
+        public byte Unknown5 => defaultKnightData.Unknown5;
+        public CountryEnum Country
         {
-            get => defaultKnightData.StartingClass;
-
-            set => SetAndNotifyIfChanged(ref defaultKnightData.StartingClass, value);
+            get => defaultKnightData.Country;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Country, value);
+        }
+        public CastlesEnum Castle
+        {
+            get => defaultKnightData.Castle;
+            set => SetAndNotifyIfChanged(ref defaultKnightData.Castle, value);
         }
 
-        public byte Weapon
-        {
-            
-            get => defaultKnightData.Weapon;
-
-            set => SetAndNotifyIfChanged(ref defaultKnightData.Weapon, value);
-        }
-        public byte Item
-        {
-            
-            get => defaultKnightData.Item;
-
-            set => SetAndNotifyIfChanged(ref defaultKnightData.Item, value);
-        }
-        public int Unknown
-        {
-
-            get => defaultKnightData.Unk;
-            set => SetAndNotifyIfChanged(ref defaultKnightData.Unk, value);
-        }
-        public byte Team
-        {
-            get => defaultKnightData.Team;
-            set => SetAndNotifyIfChanged(ref defaultKnightData.Team, value);
-        }
-        public byte Town
-        {
-            get => defaultKnightData.Town;
-            set => SetAndNotifyIfChanged(ref defaultKnightData.Town, value);
-        }
-        
+        public override int Address { get; }
     }
 }

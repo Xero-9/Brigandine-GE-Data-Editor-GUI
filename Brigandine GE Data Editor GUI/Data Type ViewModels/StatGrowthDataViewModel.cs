@@ -7,8 +7,9 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
     {
         public StatGrowthDataViewModel() { }
 
-        public StatGrowthDataViewModel(ref StatGrowthData data, MemoryAccessor memoryAccessor)
+        public StatGrowthDataViewModel(ref StatGrowthData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             statGrowthData      = data;
             this.memoryAccessor = memoryAccessor;
         }
@@ -48,5 +49,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             get => statGrowthData.AGIGrowth;
             set => SetAndNotifyIfChanged(ref statGrowthData.AGIGrowth, value);
         }
+
+        public override int Address { get; }
     }
 }

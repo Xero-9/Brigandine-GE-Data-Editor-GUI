@@ -3,11 +3,11 @@
 namespace BrigandineGEDataEditorGUI.Data_Type_Views
 {
     /// <summary>
-    /// Interaction logic for DataTypeCollectionView.xaml
+    /// Interaction logic for SpecialAttackDataView.xaml
     /// </summary>
-    public partial class DataTypeCollectionView : UserControl
+    public partial class SpecialAttackDataView : UserControl
     {
-        public DataTypeCollectionView()
+        public SpecialAttackDataView()
         {
             InitializeComponent();
         }

@@ -14,6 +14,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +39,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -63,10 +66,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Data Type Views\AttackDataView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Data Type Views\CastleDataView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Data Type Views\ClassDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -78,17 +85,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Data Type Views\ClassDataView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Data Type Views\DataTypeCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Data Type Views\MonsterDataView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Data Type Views\MonsterInSummonDataView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -98,7 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Data Type Views\SpecialAttackDataView.xaml">
+    <Page Include="Data Type Views\SpecialAttackDataHeaderView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -107,8 +106,8 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Data Type Views\StatGrowthDataView.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -118,39 +117,47 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data Type View Models\DataTypes\ClassDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\AttackDataViewModel.cs" />
-    <Compile Include="Data Type View Models\Base\BaseDataTypeViewModel.cs" />
-    <Compile Include="Data Type View Models\Base\Command.cs" />
-    <Compile Include="Data Type View Models\Base\BaseViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\CastleDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypeCollectionViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\ItemDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\DefaultKnightDataViewModel.cs" />
-    <Compile Include="Data Type View Models\MainWindowViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\MonsterDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\MonsterInSummonDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\SkillDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\SpecialAttackDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\SpellDataViewModel.cs" />
-    <Compile Include="Data Type View Models\DataTypes\StatGrowthDataViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\AttackHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\Base\BaseDataTypeHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\CastleHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\ClassHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\DefaultKnightHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\ItemHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\MonsterDataHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\MonsterInSummonDataHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\SkillDataHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\SpecialAttackDataViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\SpellDataHeaderViewModel.cs" />
+    <Compile Include="Data Type Header ViewModels\StatGrowthDataHeaderViewModel.cs" />
+    <Compile Include="Data Type ViewModels\AttackDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\Base\BaseDataTypeViewModel.cs" />
+    <Compile Include="Data Type ViewModels\Base\BaseViewModel.cs" />
+    <Compile Include="Data Type ViewModels\Base\Command.cs" />
+    <Compile Include="Data Type ViewModels\CastleDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\ClassDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\DefaultKnightDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\ItemDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\MonsterDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\MonsterInSummonDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\SkillDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\SpecialAttackDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\SpellDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\StatGrowthDataViewModel.cs" />
+    <Compile Include="Data Type ViewModels\TextDataViewModel.cs" />
     <Compile Include="Data Type Views\AttackDataView.xaml.cs">
       <DependentUpon>AttackDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data Type Views\CastleDataView.xaml.cs">
       <DependentUpon>CastleDataView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data Type Views\ClassDataView.xaml.cs">
+      <DependentUpon>ClassDataView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Data Type Views\DefaultKnightDataView.xaml.cs">
       <DependentUpon>DefaultKnightDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data Type Views\ItemDataView.xaml.cs">
       <DependentUpon>ItemDataView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Data Type Views\ClassDataView.xaml.cs">
-      <DependentUpon>ClassDataView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Data Type Views\DataTypeCollectionView.xaml.cs">
-      <DependentUpon>DataTypeCollectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data Type Views\MonsterDataView.xaml.cs">
       <DependentUpon>MonsterDataView.xaml</DependentUpon>
@@ -161,8 +168,8 @@
     <Compile Include="Data Type Views\SkillDataView.xaml.cs">
       <DependentUpon>SkillDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data Type Views\SpecialAttackDataView.xaml.cs">
-      <DependentUpon>SpecialAttackDataView.xaml</DependentUpon>
+    <Compile Include="Data Type Views\SpecialAttackDataHeaderView.xaml.cs">
+      <DependentUpon>SpecialAttackDataHeaderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data Type Views\SpellDataView.xaml.cs">
       <DependentUpon>SpellDataView.xaml</DependentUpon>
@@ -170,16 +177,58 @@
     <Compile Include="Data Type Views\StatGrowthDataView.xaml.cs">
       <DependentUpon>StatGrowthDataView.xaml</DependentUpon>
     </Compile>
+    <!--<Compile Include="Data Type ViewModels\AttackDataViewModel.cs">
+      <Link>Data Type ViewModels\AttackDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\Base\BaseDataTypeViewModel.cs">
+      <Link>Data Type ViewModels\Base\BaseDataTypeViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\Base\BaseViewModel.cs">
+      <Link>Data Type ViewModels\Base\BaseViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\Base\Command.cs">
+      <Link>Data Type ViewModels\Base\Command.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\CastleDataViewModel.cs">
+      <Link>Data Type ViewModels\CastleDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\ClassDataViewModel.cs">
+      <Link>Data Type ViewModels\ClassDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\DefaultKnightDataViewModel.cs">
+      <Link>Data Type ViewModels\DefaultKnightDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\ItemDataViewModel.cs">
+      <Link>Data Type ViewModels\ItemDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\MonsterDataViewModel.cs">
+      <Link>Data Type ViewModels\MonsterDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\MonsterInSummonDataViewModel.cs">
+      <Link>Data Type ViewModels\MonsterInSummonDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\SkillDataViewModel.cs">
+      <Link>Data Type ViewModels\SkillDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\SpecialAttackDataViewModel.cs">
+      <Link>Data Type ViewModels\SpecialAttackDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\SpellDataViewModel.cs">
+      <Link>Data Type ViewModels\SpellDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\StatGrowthDataViewModel.cs">
+      <Link>Data Type ViewModels\StatGrowthDataViewModel.cs</Link>
+    </Compile>
+    <Compile Include="Data Type ViewModels\TextDataViewModel.cs">
+      <Link>Data Type ViewModels\TextDataViewModel.cs</Link>
+    </Compile>-->
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -207,11 +256,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Brigandine GE Data Editor\Brigandine GE PS1 Data Viewer\Brigandine GE Data Editor.csproj">
+    <ProjectReference Include="..\..\Brigandine GE Data Editor\Brigandine GE Data Editor\Brigandine GE Data Editor.csproj">
       <Project>{35d2496b-32e8-453c-803b-c9e1f997622a}</Project>
       <Name>Brigandine GE Data Editor</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

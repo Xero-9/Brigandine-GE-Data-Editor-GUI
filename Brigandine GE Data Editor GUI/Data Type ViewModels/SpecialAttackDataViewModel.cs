@@ -8,14 +8,15 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
     {
         public SpecialAttackDataViewModel() { }
 
-        public SpecialAttackDataViewModel(ref unsafeSpecialAttackData data, MemoryAccessor memoryAccessor)
+        public SpecialAttackDataViewModel(ref SpecialAttackData data, MemoryAccessor memoryAccessor, int address)
         {
+            Address = address;
             specialAttackData   = data;
             this.memoryAccessor = memoryAccessor;
         }
 
         private MemoryAccessor    memoryAccessor;
-        private unsafeSpecialAttackData specialAttackData;
+        private SpecialAttackData specialAttackData;
 
         public override string ToString()
         {
@@ -26,13 +27,13 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         public string Name
         {
             get => $"{memoryAccessor.DereferenceString(specialAttackData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
+            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
         }
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(specialAttackData.Name):X}";
         public string Description
         {
             get =>
-                $"{memoryAccessor.DereferenceString(specialAttackData.Description)} at {MemoryAccessor.AdjustAddress(specialAttackData.Description):X}";
+                $"{memoryAccessor.DereferenceString(specialAttackData.Description)}";
             //set => SetAndNotifyIfChanged(ref SpecialAttackData.Description, value);
         }
 
@@ -83,7 +84,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
                         unknown = new byte[5];
                         for (int i = 0; i < unknown.Length; i++)
                         {
-                            unknown[i] = specialAttackData.Unknown[i];
+                            unknown[i] = specialAttackData.Unknowns[i];
                         }
                     }
                 }
@@ -91,5 +92,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             }
             set => SetAndNotifyIfChanged(ref unknown, value);
         }
+
+        public override int Address { get; }
     }
 }
