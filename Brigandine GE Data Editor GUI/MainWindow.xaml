@@ -80,8 +80,8 @@
         </StackPanel>
         <ContentControl Grid.Row="1" Content="{Binding SelectedBaseDataTypeHeaderViewModel}" />
         <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <Button x:Name="OpenFile" Content="Open File" Command="{Binding OpenFileCommand}" />
-            <Button x:Name="LoadAndReadFile" Content="Load And Read File" Command="{Binding LoadAndReadFileCommand}" />
+            <Button x:Name="OpenAndLoadFile" Content="Open And Load File" Command="{Binding OpenAndLoadFileCommand}" />
+            <Button x:Name="UnloadFile" Content="Unload File" Command="{Binding UnloadFileCommand}" />
             <Button IsEnabled="False" x:Name="SaveAs" Content="Save As" Command="{Binding SaveAsCommand}" ToolTip="Not supported yet." />
         </StackPanel>
     </Grid>
