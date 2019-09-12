@@ -1,8 +1,8 @@
 ﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels {
     public class StatGrowthDataViewModel : BaseDataTypeViewModel
     {
         public StatGrowthDataViewModel() { }
@@ -14,37 +14,36 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             this.memoryAccessor = memoryAccessor;
         }
 
+        // ReSharper disable once NotAccessedField.Local
         private MemoryAccessor memoryAccessor;
         private StatGrowthData statGrowthData;
-        public override string ToString()
-        {
-            return $"{HPGrowth} {MPGrowth} {STRGrowth} {INTGrowth} {AGIGrowth}";
-        }
+        public ref StatGrowthData StatGrowthData => ref statGrowthData;
+        public override string ToString() => $"{HpGrowth} {MpGrowth} {StrGrowth} {IntGrowth} {AgiGrowth}";
 
-        public byte HPGrowth
+        public byte HpGrowth
         {
             get => statGrowthData.HPGrowth;
             set => SetAndNotifyIfChanged(ref statGrowthData.HPGrowth, value);
         }
-        public byte MPGrowth
+        public byte MpGrowth
         {
             get => statGrowthData.MPGrowth;
             set => SetAndNotifyIfChanged(ref statGrowthData.MPGrowth, value);
         }
 
-        public byte STRGrowth
+        public byte StrGrowth
         {
             get => statGrowthData.STRGrowth;
             set => SetAndNotifyIfChanged(ref statGrowthData.STRGrowth, value);
         }
 
-        public byte INTGrowth
+        public byte IntGrowth
         {
             get => statGrowthData.INTGrowth;
             set => SetAndNotifyIfChanged(ref statGrowthData.INTGrowth, value);
         }
 
-        public byte AGIGrowth
+        public byte AgiGrowth
         {
             get => statGrowthData.AGIGrowth;
             set => SetAndNotifyIfChanged(ref statGrowthData.AGIGrowth, value);

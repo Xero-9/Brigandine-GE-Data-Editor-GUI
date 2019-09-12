@@ -1,15 +1,10 @@
-﻿using System.Windows.Controls;
-
-namespace BrigandineGEDataEditorGUI.Data_Type_Views
+﻿namespace BrigandineGEDataEditorGUI.Data_Type_Views
 {
     /// <summary>
     /// Interaction logic for ClassDataView.xaml
     /// </summary>
-    public partial class ClassDataView : UserControl
+    public partial class ClassDataView
     {
-        public ClassDataView()
-        {
-            InitializeComponent();
-        }
+        public ClassDataView() => InitializeComponent();
     }
 }

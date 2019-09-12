@@ -1,15 +1,10 @@
-﻿using System.Windows.Controls;
-
-namespace BrigandineGEDataEditorGUI.Data_Type_Views
+﻿namespace BrigandineGEDataEditorGUI.Data_Type_Views
 {
     /// <summary>
     /// Interaction logic for SpellDataView.xaml
     /// </summary>
-    public partial class SpellDataView : UserControl
+    public partial class SpellDataView
     {
-        public SpellDataView()
-        {
-            InitializeComponent();
-        }
+        public SpellDataView() => InitializeComponent();
     }
 }

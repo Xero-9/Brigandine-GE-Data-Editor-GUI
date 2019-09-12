@@ -1,8 +1,8 @@
 ﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels {
     public class MonsterInSummonDataViewModel : BaseDataTypeViewModel
     {
         public MonsterInSummonDataViewModel() { }
@@ -10,77 +10,70 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
         public MonsterInSummonDataViewModel(ref MonsterInSummonData data, MemoryAccessor memoryAccessor, int address)
         {
             Address = address;
-            monsterInSummonData = data;
+            MonsterInSummonData = data;
             this.memoryAccessor = memoryAccessor;
         }
 
-        private MemoryAccessor      memoryAccessor;
+        private readonly MemoryAccessor      memoryAccessor;
         private MonsterInSummonData monsterInSummonData;
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        public ref MonsterInSummonData MonsterInSummonData => ref monsterInSummonData;
+        public override string ToString() => Name;
 
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
-        public string Name
-        {
-            get => $"{memoryAccessor.DereferenceString(monsterInSummonData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
-        }
-        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(monsterInSummonData.Name):X}";
+        public string Name => $"{memoryAccessor.DereferenceString(MonsterInSummonData.Name)}";
+        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(MonsterInSummonData.Name):X}";
         public byte Level
         {
-            get => monsterInSummonData.Level;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.Level, value);
+            get => MonsterInSummonData.Level;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Level, value);
         }
 
         public byte Exp
         {
-            get => monsterInSummonData.Exp;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.Exp, value);
+            get => MonsterInSummonData.Exp;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Exp, value);
         }
 
-        public ushort BaseHP
+        public ushort BaseHp
         {
-            get => monsterInSummonData.BaseHP;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.BaseHP, value);
+            get => MonsterInSummonData.BaseHP;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.BaseHP, value);
         }
 
-        public ushort BaseMP
+        public ushort BaseMp
         {
-            get => monsterInSummonData.BaseMP;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.BaseMP, value);
+            get => MonsterInSummonData.BaseMP;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.BaseMP, value);
         }
 
         public byte Str
         {
-            get => monsterInSummonData.Str;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.Str, value);
+            get => MonsterInSummonData.Str;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Str, value);
         }
 
         public byte Int
         {
-            get => monsterInSummonData.Int;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.Int, value);
+            get => MonsterInSummonData.Int;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Int, value);
         }
 
         public byte Agi
         {
-            get => monsterInSummonData.Hit;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.Hit, value);
+            get => MonsterInSummonData.Hit;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.Hit, value);
         }
 
         public byte RuneCost
         {
-            get => monsterInSummonData.RuneCost;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.RuneCost, value);
+            get => MonsterInSummonData.RuneCost;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.RuneCost, value);
         }
 
         public ushort ManaCost
         {
-            get => monsterInSummonData.ManaCost;
-            set => SetAndNotifyIfChanged(ref monsterInSummonData.ManaCost, value);
+            get => MonsterInSummonData.ManaCost;
+            set => SetAndNotifyIfChanged(ref MonsterInSummonData.ManaCost, value);
         }
 
         public override int Address { get; }

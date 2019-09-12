@@ -1,9 +1,9 @@
 ﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditor.Enums;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels
 {
     public class DefaultKnightDataViewModel : BaseDataTypeViewModel
     {
@@ -18,13 +18,10 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             this.memoryAccessor = memoryAccessor;
         }
 
-        private MemoryAccessor memoryAccessor;
+        private readonly MemoryAccessor memoryAccessor;
         private DefaultKnightData defaultKnightData;
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        public ref DefaultKnightData DefaultKnightData => ref defaultKnightData;
+        public override string ToString() => Name;
 
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
         private string name;
@@ -52,48 +49,48 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref defaultKnightData.Level, value);
         }
 
-        public ushort XP
+        public ushort Xp
         {
             get => defaultKnightData.XP;
             
             set => SetAndNotifyIfChanged(ref defaultKnightData.XP, value);
         }
 
-        public ushort HP
+        public ushort Hp
         {
             get => defaultKnightData.HP;
             
             set => SetAndNotifyIfChanged(ref defaultKnightData.HP, value);
         }
 
-        public ushort MP
+        public ushort Mp
         {
             get => defaultKnightData.MP;
             set => SetAndNotifyIfChanged(ref defaultKnightData.MP, value);
         }
 
-        public byte STR
+        public byte Str
         {
             get => defaultKnightData.STR;
             
             set => SetAndNotifyIfChanged(ref defaultKnightData.STR, value);
         }
 
-        public byte INT
+        public byte Int
         {
             get => defaultKnightData.INT;
             
             set => SetAndNotifyIfChanged(ref defaultKnightData.INT, value);
         }
 
-        public byte AGI
+        public byte Agi
         {
             get => defaultKnightData.AGI;
             
             set => SetAndNotifyIfChanged(ref defaultKnightData.AGI, value);
         }
 
-        public byte RunePwrGrowth_RuneArea
+        public byte RunePwrGrowthRuneArea
         {
             get => defaultKnightData.RunePwrGrowth_RuneArea;
             
@@ -107,12 +104,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref defaultKnightData.RunePwr, value);
         }
 
-        public byte[] Monsters
-        {
-            get => defaultKnightData.Monsters.ToArray();
-            //set => SetAndNotifyIfChanged(ref defaultKnightData.Monsters, value);
-        }
-
+        public byte[] Monsters => defaultKnightData.Monsters.ToArray();
         public byte[] Unknown1 => defaultKnightData.Unknown1.ToArray();
         public byte[] Unknown2 => defaultKnightData.Unknown2.ToArray();
         public byte[] Unknown3 => defaultKnightData.Unknown3.ToArray();

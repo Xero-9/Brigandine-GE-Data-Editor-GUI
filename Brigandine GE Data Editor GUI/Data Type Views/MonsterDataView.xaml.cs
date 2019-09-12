@@ -1,15 +1,10 @@
-﻿using System.Windows.Controls;
-
-namespace BrigandineGEDataEditorGUI.Data_Type_Views
+﻿namespace BrigandineGEDataEditorGUI.Data_Type_Views
 {
     /// <summary>
     /// Interaction logic for MonsterDataView.xaml
     /// </summary>
-    public partial class MonsterDataView : UserControl
+    public partial class MonsterDataView
     {
-        public MonsterDataView()
-        {
-            InitializeComponent();
-        }
+        public MonsterDataView() => InitializeComponent();
     }
 }

@@ -1,43 +1,71 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
-using System.IO.MemoryMappedFiles;
 using System.Windows;
 using BrigandineGEDataEditor;
-using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels;
 using BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels.Base;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 using Microsoft.Win32;
 
 namespace BrigandineGEDataEditorGUI
 {
     public class MainWindowViewModel : BaseViewModel
     {
+        private static ObservableCollection<BaseDataTypeHeaderViewModel> LoadSlpsFile(MemoryAccessor memoryAccessor)
+        {
+            if(memoryAccessor == null)
+                return null;
+            var dataTypeHeaderViewModel = new ObservableCollection<BaseDataTypeHeaderViewModel>
+                                          {
+                                              new AttackDataHeaderViewModel(memoryAccessor),
+                                              new CastleDataHeaderViewModel(memoryAccessor),
+                                              new ClassDataHeaderViewModel(memoryAccessor),
+                                              new DefaultKnightHeaderViewModel(memoryAccessor),
+                                              new ItemDataHeaderViewModel(memoryAccessor),
+                                              new SkillDataHeaderViewModel(memoryAccessor),
+                                              new SpecialAttackDataHeaderViewModel(memoryAccessor),
+                                              new SpellDataHeaderViewModel(memoryAccessor)
+                                          };
+
+            // Work In Progress
+            //dataTypeHeaderViewModel.Add(new MonsterInSummonDataHeaderViewModel(memoryAccessor));
+            //dataTypeHeaderViewModel.Add(new MonsterDataHeaderViewModel(memoryAccessor));
+            //dataTypeHeaderViewModel.Add(new StatGrowthDataHeaderViewModel(memoryAccessor));
+
+            return dataTypeHeaderViewModel;
+        }
         // Dummy class so that the different DataType names are displayed even before a SLPS_026 file is loaded
         #region DummyDataTypeHeaderViewModel
 
         private class DummyDataTypeHeaderViewModel : BaseDataTypeHeaderViewModel
         {
-            public DummyDataTypeHeaderViewModel(string name)
-            {
-                Name = name;
-            }
+            public DummyDataTypeHeaderViewModel(string name) : base(null) => Name = name;
             public override string Name { get; }
+
+            // This is what displayed if set to anything but Empty.
             public override string ToString() => string.Empty;
+            public override void SetAccessor() => throw new NotImplementedException();
         }
 
         private static ObservableCollection<BaseDataTypeHeaderViewModel> SetupDummyDataTypeHeaders()
         {
-            var dataTypeHeaderViewModel = new ObservableCollection<BaseDataTypeHeaderViewModel>();
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("AttackDataHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("CastleDataHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("ClassDataHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("DefaultKnightHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("ItemDataHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("MonsterInSummonDataHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("SkillDataHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("SpecialAttackDataHeaderViewModel"));
-            dataTypeHeaderViewModel.Add(new DummyDataTypeHeaderViewModel("SpellDataHeaderViewModel"));
+            var dataTypeHeaderViewModel = new ObservableCollection<BaseDataTypeHeaderViewModel>
+                                          {
+                                              new DummyDataTypeHeaderViewModel("AttackDataHeaderViewModel"),
+                                              new DummyDataTypeHeaderViewModel("CastleDataHeaderViewModel"),
+                                              new DummyDataTypeHeaderViewModel("ClassDataHeaderViewModel"),
+                                              new DummyDataTypeHeaderViewModel("DefaultKnightHeaderViewModel"),
+                                              new DummyDataTypeHeaderViewModel("ItemDataHeaderViewModel"),
+                                              new DummyDataTypeHeaderViewModel("SkillDataHeaderViewModel"),
+                                              new DummyDataTypeHeaderViewModel("SpecialAttackDataHeaderViewModel"),
+                                              new DummyDataTypeHeaderViewModel("SpellDataHeaderViewModel")
+                                          };
+
+            // Work In Progress
+            //dataTypeHeaderViewModel.Add(new DataTypeHeaderAndTypeInfo() { DataTypeHeaderViewModel = new DummyDataTypeHeaderViewModel("MonsterInSummonDataHeaderViewModel") });
+            //dataTypeHeaderViewModel.Add(new DataTypeHeaderAndTypeInfo() { DataTypeHeaderViewModel = new DummyDataTypeHeaderViewModel("MonsterDataHeaderViewModel") });
+            //dataTypeHeaderViewModel.Add(new DataTypeHeaderAndTypeInfo() { DataTypeHeaderViewModel = new DummyDataTypeHeaderViewModel("StatGrowthDataHeaderViewModel") });
             return dataTypeHeaderViewModel;
         }
         #endregion
@@ -45,20 +73,19 @@ namespace BrigandineGEDataEditorGUI
         private string fileToMap;
         public MainWindowViewModel()
         {
+            LoadDefaultDataCommand = new Command(LoadDefaultData, () => true);
             OpenAndLoadFileCommand = new Command(OpenAndLoadFile, () => true);
-            UnloadFileCommand = new Command(UnloadFile, () => true);
-            OnCloseCommand = new Command(DisposeOfMappedFiles, () => true);
-            SaveAsCommand = new Command(SaveAs, () => true);
-
+            UnloadWithoutSaveCommand = new Command(UnloadWithoutSave, () => true);
+            UnloadAndSaveCommand = new Command(UnloadAndSave, () => true);
+            SaveToFileCommand = new Command(SaveToFile, () => true);
             DataTypeHeaderViewModel = SetupDummyDataTypeHeaders();
-            // TODO DELETE THE LINES BELOW SO THE FILE IS NOT AUTOLOADED FROM DIRECTORY. THIS IS FOR QUICK TESTING
-            //fileToMap = @"C:\Users\Dave\Documents\Visual Studio 2017\Projects\Brigandine GE Data Editor GUI\SLPS_026";
-            //LoadAndReadFile();
-
-
         }
 
-        private void DisposeOfMappedFiles() => MemoryAccessor.DisposeAllMappedFiles();
+        private void LoadDefaultData()
+        {
+            memoryAccessor = MemoryAccessor.CreateAccessor();
+            DataTypeHeaderViewModel = LoadSlpsFile(memoryAccessor);
+        }
         private void OpenAndLoadFile() 
         {
             var openFileDialog = new OpenFileDialog();
@@ -68,75 +95,75 @@ namespace BrigandineGEDataEditorGUI
                 if(fileToMap != null)
                 {
                     memoryAccessor = MemoryAccessor.CreateAccessor(fileToMap);
-
-                    if(memoryAccessor == null)
-                        return;
-                    DataTypeHeaderViewModel = new ObservableCollection<BaseDataTypeHeaderViewModel>();
-                    DataTypeHeaderViewModel.Add(new AttackDataHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new CastleDataHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new ClassDataHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new DefaultKnightHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new ItemDataHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new MonsterInSummonDataHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new SkillDataHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new SpecialAttackDataHeaderViewModel(memoryAccessor));
-                    DataTypeHeaderViewModel.Add(new SpellDataHeaderViewModel(memoryAccessor));
-                
-                    // Work In Progress
-                    //DataTypeHeaderViewModel.Add(new MonsterDataHeaderViewModel(memoryAccessor));
-                    //DataTypeHeaderViewModel.Add(new StatGrowthDataHeaderViewModel(memoryAccessor));
+                    DataTypeHeaderViewModel = LoadSlpsFile(memoryAccessor);
                 }
             }
         }
 
-        private void UnloadFile()
+        private void UnloadWithoutSave()
         {
             DataTypeHeaderViewModel = SetupDummyDataTypeHeaders();
             memoryAccessor.Dispose();
         }
 
-        private void SaveAllDataTypesIntoMemoryMappedFile(string path)
+        private void UnloadAndSave()
         {
-            using(var memoryMappedFile = MemoryMappedFile.CreateFromFile(path))
+
+            foreach (var baseDataTypeHeaderViewModel in DataTypeHeaderViewModel)
             {
-                using(var accessor = memoryMappedFile.CreateViewAccessor())
+                baseDataTypeHeaderViewModel.SetAccessor();
+            }
+            if (!memoryAccessor.UsingDefaultData)
+            {
+                memoryAccessor.SaveAllDataTypesIntoMemoryMappedFile();
+            }
+            else if (MessageBox.Show("Can not save default data back to resource.\n" +
+                                     "Would you still like to unload the data.", "", MessageBoxButton.YesNo) ==
+                     MessageBoxResult.No)
+                return;
+            UnloadWithoutSave();
+        }
+
+        private void SaveToFile()
+        {
+            if(memoryAccessor == null) return;
+            var saveDialog = new SaveFileDialog { CheckFileExists = true };
+            if (saveDialog.ShowDialog() == true)
+            {
+                var file = File.Open(saveDialog.FileName, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+                try
                 {
-                    accessor.WriteArray(new AttackData().GetAddress(0), memoryAccessor.Attacks, 0, memoryAccessor.Attacks.Length);
-                    accessor.WriteArray(new CastleData().GetAddress(0), memoryAccessor.Castles, 0, memoryAccessor.Castles.Length);
-                    accessor.WriteArray(new ClassData ().GetAddress(0), memoryAccessor.Classes, 0, memoryAccessor.Castles.Length);
-                    accessor.WriteArray(new DefaultKnightData().GetAddress(0), memoryAccessor.DefaultKnights, 0, memoryAccessor.DefaultKnights.Length);
-                    accessor.WriteArray(new ItemData().GetAddress(0), memoryAccessor.Items, 0, memoryAccessor.Items.Length);
-                    accessor.WriteArray(new MonsterInSummonData().GetAddress(0), memoryAccessor.MonstersInSummon, 0, memoryAccessor.MonstersInSummon.Length);
-                    accessor.WriteArray(new SkillData().GetAddress(0), memoryAccessor.Skills, 0, memoryAccessor.Skills.Length);
-                    accessor.WriteArray(new SpellData().GetAddress(0), memoryAccessor.Spells, 0, memoryAccessor.Spells.Length);
-                    accessor.WriteArray(new SpecialAttackData().GetAddress(0), memoryAccessor.SpecialAttacks, 0, memoryAccessor.SpecialAttacks.Length);
+                    memoryAccessor.SaveAllDataTypesIntoMemoryMappedFile(file);
+                }
+                catch (Exception e)
+                {
+                    // TODO Put this comment in ReadMe.md
+                    // Use Case:
+                    // If you save the changes to a file you can load it later and save it to a real file.
+                    if (MessageBox.Show(e.Message + "\n" +
+                                        "Do you want to use an empty file? This file will not have the data or needed to run or any changed text.",
+                                        "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        if (file.Length > MemoryAccessor.FileSize)
+                        {
+                            file.Dispose();
+                            File.Delete(saveDialog.FileName);
+                            file = File.Create(saveDialog.FileName);
+                        }
 
-// Work In Progress
-                    #if Work_In_Progress
-                        accessor.WriteArray(new MonsterData().GetAddress(0), memoryAccessor.Monsters, 0, memoryAccessor.Attacks.Length);
-                        accessor.WriteArray(new StatGrowthData().GetAddress(0), memoryAccessor.StatGrowths, 0, memoryAccessor.Attacks.Length);
-                    #endif
-
+                        var emptyBytes = new byte[MemoryAccessor.FileSize];
+                        file.Write(emptyBytes, 0, emptyBytes.Length);
+                        file.Flush(true);
+                        memoryAccessor.SaveAllDataTypesIntoMemoryMappedFile(file);
+                    }
                 }
             }
         }
-        // TODO Finish Implementing.
-        private void SaveAs()
-        {
-            
-            var saveFileDialog = new SaveFileDialog();
-            saveFileDialog.CheckFileExists = true;
-            if(saveFileDialog.ShowDialog() == true)
-            {
-               
-            }
-            MessageBox.Show("Done Saving File");
-        }
-        public Command SaveAsCommand { get; set; }
+        public Command LoadDefaultDataCommand { get; set; }
         public Command OpenAndLoadFileCommand { get; set; }
-        public Command UnloadFileCommand { get; set; }
-        public Command OnCloseCommand { get; set; }
-
+        public Command UnloadWithoutSaveCommand { get; set; }
+        public Command UnloadAndSaveCommand { get; set; }
+        public Command SaveToFileCommand { get; set; }
         private ObservableCollection<BaseDataTypeHeaderViewModel> dataTypeHeaderViewModel;
         public ObservableCollection<BaseDataTypeHeaderViewModel> DataTypeHeaderViewModel
         {

@@ -1,15 +1,10 @@
-﻿using System.Windows.Controls;
-
-namespace BrigandineGEDataEditorGUI.Data_Type_Views
+﻿namespace BrigandineGEDataEditorGUI.Data_Type_Views
 {
     /// <summary>
     /// Interaction logic for DefaultKnightDataView.xaml
     /// </summary>
-    public partial class DefaultKnightDataView : UserControl
+    public partial class DefaultKnightDataView
     {
-        public DefaultKnightDataView()
-        {
-            InitializeComponent();
-        }
+        public DefaultKnightDataView() => InitializeComponent();
     }
 }

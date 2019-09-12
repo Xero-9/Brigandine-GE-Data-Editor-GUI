@@ -3,7 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
     xmlns:local="clr-namespace:BrigandineGEDataEditorGUI"
     xmlns:dataTypeHeaderViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
@@ -27,9 +26,6 @@
         <DataTemplate DataType="{x:Type dataTypeHeaderViews:ItemDataHeaderViewModel}">
             <dataTypeViews:ItemDataView />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type dataTypeHeaderViews:MonsterInSummonDataHeaderViewModel}">
-            <dataTypeViews:MonsterInSummonDataView />
-        </DataTemplate>
         <DataTemplate DataType="{x:Type dataTypeHeaderViews:SkillDataHeaderViewModel}">
             <dataTypeViews:SkillDataView />
         </DataTemplate>
@@ -41,6 +37,9 @@
         </DataTemplate>
 
         <!-- Work in Progress -->
+        <DataTemplate DataType="{x:Type dataTypeHeaderViews:MonsterInSummonDataHeaderViewModel}">
+            <dataTypeViews:MonsterInSummonDataView />
+        </DataTemplate>
         <DataTemplate DataType="{x:Type dataTypeHeaderViews:MonsterDataHeaderViewModel}">
             <dataTypeViews:MonsterDataView />
         </DataTemplate>
@@ -48,12 +47,6 @@
             <dataTypeViews:StatGrowthDataView />
         </DataTemplate>
     </Window.Resources>
-
-    <i:Interaction.Triggers >
-        <i:EventTrigger EventName="Closing" >
-            <i:InvokeCommandAction Command="{Binding OnCloseCommand}" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
 
     <Grid
         d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type={x:Type local:MainWindowViewModel}}">
@@ -63,7 +56,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" Orientation="Horizontal">
-            <ListView Grid.Row="0" ItemsSource="{Binding DataTypeHeaderViewModel}"
+            <ListView ItemsSource="{Binding DataTypeHeaderViewModel}"
                       SelectedItem="{Binding SelectedBaseDataTypeHeaderViewModel}">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -80,10 +73,11 @@
         </StackPanel>
         <ContentControl Grid.Row="1" Content="{Binding SelectedBaseDataTypeHeaderViewModel}" />
         <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Button x:Name="LoadDefaultData" Content="Load Default Data" Command="{Binding LoadDefaultDataCommand}"/>
             <Button x:Name="OpenAndLoadFile" Content="Open And Load File" Command="{Binding OpenAndLoadFileCommand}" />
-            <Button x:Name="UnloadFile" Content="Unload File" Command="{Binding UnloadFileCommand}" />
-            <Button IsEnabled="False" x:Name="SaveAs" Content="Save As" Command="{Binding SaveAsCommand}" ToolTip="Not supported yet." />
+            <Button x:Name="UnloadWithoutSave" Content="Unload Without Saving" Command="{Binding UnloadWithoutSaveCommand}" />
+            <Button x:Name="UnloadAndSave" Content="Unload and Save" Command="{Binding UnloadAndSaveCommand}" />
+            <Button x:Name="SaveToFile" Content="Save To File" Command="{Binding SaveToFileCommand}" />
         </StackPanel>
     </Grid>
-
 </Window>

@@ -1,9 +1,9 @@
 ﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditor.Enums;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels {
     public class MonsterDataViewModel : BaseDataTypeViewModel
     {
         public MonsterDataViewModel() { }
@@ -15,20 +15,13 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             this.memoryAccessor = memoryAccessor;
         }
 
-        private MemoryAccessor memoryAccessor;
+        private readonly MemoryAccessor memoryAccessor;
         private MonsterData    monsterData;
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        public ref MonsterData MonsterData => ref monsterData;
+        public override string ToString() => Name;
 
         ////TODO Create special string like control type for handling getting and setting strings from memory accessor.
-        public string Name
-        {
-            get => $"{memoryAccessor.DereferenceString(monsterData.Name)}";
-            //set => SetAndNotifyIfChanged(ref MonsterDataView.Name, value);
-        }
+        public string Name => $"{memoryAccessor.DereferenceString(monsterData.Name)}";
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(monsterData.Name):X}";
         public CountryEnum Country
         {
@@ -54,34 +47,34 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             set => SetAndNotifyIfChanged(ref monsterData.Level, value);
         }
 
-        public ushort HP
+        public ushort Hp
         {
-            get => monsterData.HP;
-            set => SetAndNotifyIfChanged(ref monsterData.HP, value);
+            get => monsterData.Hp;
+            set => SetAndNotifyIfChanged(ref monsterData.Hp, value);
         }
 
-        public ushort MP
+        public ushort Mp
         {
-            get => monsterData.MP;
-            set => SetAndNotifyIfChanged(ref monsterData.MP, value);
+            get => monsterData.Mp;
+            set => SetAndNotifyIfChanged(ref monsterData.Mp, value);
         }
 
-        public byte STR
+        public byte Str
         {
-            get => monsterData.STR;
-            set => SetAndNotifyIfChanged(ref monsterData.STR, value);
+            get => monsterData.Str;
+            set => SetAndNotifyIfChanged(ref monsterData.Str, value);
         }
 
-        public byte INT
+        public byte Int
         {
-            get => monsterData.INT;
-            set => SetAndNotifyIfChanged(ref monsterData.INT, value);
+            get => monsterData.Int;
+            set => SetAndNotifyIfChanged(ref monsterData.Int, value);
         }
 
-        public byte AGI
+        public byte Agi
         {
-            get => monsterData.AGI;
-            set => SetAndNotifyIfChanged(ref monsterData.AGI, value);
+            get => monsterData.Agi;
+            set => SetAndNotifyIfChanged(ref monsterData.Agi, value);
         }
 
         public byte ItemEquipped

@@ -1,10 +1,8 @@
-﻿using System;
-using BrigandineGEDataEditor;
+﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
-using BrigandineGEDataEditor.Enums;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels
 {
     public class AttackDataViewModel : BaseDataTypeViewModel
     {
@@ -14,79 +12,64 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
         }
         public AttackDataViewModel(ref AttackData data, MemoryAccessor memoryAccessor, int address)
         {
-            attackData          = data;
+            AttackData = data;
             Address = address;
             this.memoryAccessor = memoryAccessor;
         }
 
-        private MemoryAccessor memoryAccessor;
-        private AttackData     attackData;
+        private readonly MemoryAccessor memoryAccessor;
+        public AttackData AttackData;
+        //public ref AttackData AttackData => ref attackData;
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string ToString() => Name;
 
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
-        public string Name
-        {
-            get => $"{memoryAccessor.DereferenceString(attackData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attackData.Name, value);
-        }
-
-        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(attackData.Name):X}";
-        public string Description
-        {
-            get => $"{memoryAccessor.DereferenceString(attackData.Description)}";
-            //set => SetAndNotifyIfChanged(ref description, value);
-        }
+        public string Name => $"{memoryAccessor.DereferenceString(AttackData.Name)}";
+        public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(AttackData.Name):X}";
+        public string Description => $"{memoryAccessor.DereferenceString(AttackData.Description)}";
 
         public byte Hit
         {
-            get => attackData.Hit;
-            set => SetAndNotifyIfChanged(ref attackData.Hit, value);
+            get => AttackData.Hit;
+            set => SetAndNotifyIfChanged(ref AttackData.Hit, value);
         }
 
         public byte RangeMin
         {
-            get => attackData.RangeMin;
-            set => SetAndNotifyIfChanged(ref attackData.RangeMin, value);
+            get => AttackData.RangeMin;
+            set => SetAndNotifyIfChanged(ref AttackData.RangeMin, value);
         }
 
         public byte RangeMax
         {
-            get => attackData.RangeMax;
-            set => SetAndNotifyIfChanged(ref attackData.RangeMax, value);
+            get => AttackData.RangeMax;
+            set => SetAndNotifyIfChanged(ref AttackData.RangeMax, value);
         }
 
         public byte Damage
         {
-            get => attackData.Damage;
-            set => SetAndNotifyIfChanged(ref attackData.Damage, value);
+            get => AttackData.Damage;
+            set => SetAndNotifyIfChanged(ref AttackData.Damage, value);
         }
 
-        public Elements Element
-        {
-            get => attackData.Element.GetElements();
-            //set => SetAndNotifyIfChanged(ref attackData.Element, value);
-        }
+        public Elements Element => AttackData.Element.GetElements();
 
         public byte GroundOrSky
         {
-            get => attackData.GroundOrSky;
-            set => SetAndNotifyIfChanged(ref attackData.GroundOrSky, value);
+            get => AttackData.GroundOrSky;
+            set => SetAndNotifyIfChanged(ref AttackData.GroundOrSky, value);
         }
 
         public byte Unknown
         {
-            get => attackData.Unknown1;
-            set => SetAndNotifyIfChanged(ref attackData.Unknown1, value);
+            get => AttackData.Unknown1;
+            set => SetAndNotifyIfChanged(ref AttackData.Unknown1, value);
         }
 
         public byte UsableAfterMove
         {
-            get => attackData.UsableAfterMove;
-            set => SetAndNotifyIfChanged(ref attackData.UsableAfterMove, value);
+            get => AttackData.UsableAfterMove;
+            set => SetAndNotifyIfChanged(ref AttackData.UsableAfterMove, value);
         }
 
         public byte[] Unknowns
@@ -96,7 +79,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
                 var bytes = new byte[3];
                 for (int i = 0; i < 3; i++)
                 {
-                    bytes[i] = attackData.Unknowns[i];
+                    bytes[i] = AttackData.Unknowns[i];
                 }
 
                 return bytes;

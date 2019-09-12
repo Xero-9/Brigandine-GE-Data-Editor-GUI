@@ -3,10 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
-             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
-             xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
              xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
+             xmlns:dataTypeViewModels = "clr-namespace:BrigandineGEDataEditorGUI.Data_Type_ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <Grid d:DataContext = "{d:DesignInstance d:Type=dataTypeHeaderViewModels:CastleDataHeaderViewModel, IsDesignTimeCreatable=True}" >
@@ -18,7 +16,7 @@
                 <DataGridTextColumn Header="MovesFlag"  Binding="{Binding MovesFlag}" />
                 <DataGridTemplateColumn Header="CastlesConnectedTo">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType = "dataTypeViewModels:CastleDataViewModel" >
                             <ListView ItemsSource="{Binding CastlesConnectedTo}" >
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -34,7 +32,7 @@
                 <DataGridTextColumn Header="ManaPerMonth" Binding="{Binding ManaPerMonth}" />
                 <DataGridTemplateColumn Header="MonstersThatCanBeSummoned">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType = "dataTypeViewModels:CastleDataViewModel" >
                             <ListView ItemsSource="{Binding MonstersThatCanBeSummoned}" >
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>

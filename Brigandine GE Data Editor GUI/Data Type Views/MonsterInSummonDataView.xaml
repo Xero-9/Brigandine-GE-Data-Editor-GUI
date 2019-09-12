@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
-             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
              xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
              xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
              mc:Ignorable="d" 
@@ -19,8 +17,8 @@
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Level" Binding="{Binding Level}" />
                 <DataGridTextColumn Header="Exp" Binding="{Binding Exp}" />
-                <DataGridTextColumn Header="BaseHP" Binding="{Binding BaseHP}" />
-                <DataGridTextColumn Header="BaseMP" Binding="{Binding BaseMP}" />
+                <DataGridTextColumn Header="BaseHP" Binding="{Binding BaseHp}" />
+                <DataGridTextColumn Header="BaseMP" Binding="{Binding BaseMp}" />
                 <DataGridTextColumn Header="Str" Binding="{Binding Str}" />
                 <DataGridTextColumn Header="Int" Binding="{Binding Int}" />
                 <DataGridTextColumn Header="Agi" Binding="{Binding Agi}" />

@@ -1,9 +1,8 @@
 ﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
-using BrigandineGEDataEditor.Enums;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels {
     public class SpellDataViewModel : BaseDataTypeViewModel
     {
         public SpellDataViewModel() { }
@@ -15,28 +14,17 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             this.memoryAccessor = memoryAccessor;
         }
 
-        private MemoryAccessor memoryAccessor;
+        private readonly MemoryAccessor memoryAccessor;
         private SpellData      spellData;
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        public ref SpellData SpellData => ref spellData;
+        public override string ToString() => Name;
 
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
-        public string Name
-        {
-            get => $"{memoryAccessor.DereferenceString(spellData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
-        }
+        public string Name => $"{memoryAccessor.DereferenceString(spellData.Name)}";
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(spellData.Name):X}";
-        public string Description
-        {
-            get => $"{memoryAccessor.DereferenceString(spellData.Description)}";
-            //set => SetAndNotifyIfChanged(ref spellData.Description, value);
-        }
+        public string Description => $"{memoryAccessor.DereferenceString(spellData.Description)}";
 
-        public ushort MPCost
+        public ushort MpCost
         {
             get => spellData.MPCost;
             set => SetAndNotifyIfChanged(ref spellData.MPCost, value);
@@ -54,11 +42,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             set => SetAndNotifyIfChanged(ref spellData.Damage, value);
         }
 
-        public Elements Elements
-        {
-            get => spellData.Element.GetElements();
-            //set => SetAndNotifyIfChanged(ref spellData.Element, value);
-        }
+        public Elements Elements => spellData.Element.GetElements();
 
         public byte GroundAndSky
         {
@@ -72,27 +56,25 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             set => SetAndNotifyIfChanged(ref spellData.Unknown1, value);
         }
 
-        public byte AOE
+        public byte Aoe
         {
             get => spellData.AOE;
             set => SetAndNotifyIfChanged(ref spellData.AOE, value);
         }
-        private byte[ ] unknown = null;
+        private byte[ ] unknown;
         public byte[] Unknown
         {
             get
             {
-                unsafe
+                if (unknown == null)
                 {
-                    if (unknown == null)
+                    unknown = new byte[5];
+                    for (int i = 0; i < unknown.Length; i++)
                     {
-                        unknown = new byte[5];
-                        for (int i = 0; i < unknown.Length; i++)
-                        {
-                            unknown[i] = spellData.Unknowns[i];
-                        }
+                        unknown[i] = spellData.Unknowns[i];
                     }
                 }
+
                 return unknown;
             }
             set => SetAndNotifyIfChanged(ref unknown, value);

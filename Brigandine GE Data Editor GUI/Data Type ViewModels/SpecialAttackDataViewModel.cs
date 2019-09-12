@@ -1,9 +1,8 @@
 ﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
-using BrigandineGEDataEditor.Enums;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels {
     public class SpecialAttackDataViewModel : BaseDataTypeViewModel
     {
         public SpecialAttackDataViewModel() { }
@@ -15,29 +14,18 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             this.memoryAccessor = memoryAccessor;
         }
 
-        private MemoryAccessor    memoryAccessor;
+        private readonly MemoryAccessor    memoryAccessor;
         private SpecialAttackData specialAttackData;
+        public ref SpecialAttackData SpecialAttackData => ref specialAttackData;
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string ToString() => Name;
 
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
-        public string Name
-        {
-            get => $"{memoryAccessor.DereferenceString(specialAttackData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
-        }
+        public string Name => $"{memoryAccessor.DereferenceString(specialAttackData.Name)}";
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(specialAttackData.Name):X}";
-        public string Description
-        {
-            get =>
-                $"{memoryAccessor.DereferenceString(specialAttackData.Description)}";
-            //set => SetAndNotifyIfChanged(ref SpecialAttackData.Description, value);
-        }
+        public string Description => $"{memoryAccessor.DereferenceString(specialAttackData.Description)}";
 
-        public byte MP
+        public byte Mp
         {
             get => specialAttackData.MP;
             set => SetAndNotifyIfChanged(ref specialAttackData.MP, value);
@@ -61,33 +49,27 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models {
             set => SetAndNotifyIfChanged(ref specialAttackData.Unk1, value);
         }
 
-        public Elements Elements
-        {
-            get => specialAttackData.Element.GetElements();
-            //set => SetAndNotifyIfChanged(ref SpecialAttackData.Element, value);
-        }
+        public Elements Elements => specialAttackData.Element.GetElements();
 
         public byte GroundOrSky
         {
             get => specialAttackData.GroundOrSky;
             set => SetAndNotifyIfChanged(ref specialAttackData.GroundOrSky, value);
         }
-        private byte[ ] unknown = null;
+        private byte[ ] unknown;
         public byte[] Unknown
         {
             get
             {
-                unsafe
+                if (unknown == null)
                 {
-                    if (unknown == null)
+                    unknown = new byte[5];
+                    for (int i = 0; i < unknown.Length; i++)
                     {
-                        unknown = new byte[5];
-                        for (int i = 0; i < unknown.Length; i++)
-                        {
-                            unknown[i] = specialAttackData.Unknowns[i];
-                        }
+                        unknown[i] = specialAttackData.Unknowns[i];
                     }
                 }
+
                 return unknown;
             }
             set => SetAndNotifyIfChanged(ref unknown, value);

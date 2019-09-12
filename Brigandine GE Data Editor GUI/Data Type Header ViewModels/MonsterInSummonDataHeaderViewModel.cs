@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using BrigandineGEDataEditor;
 using BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels.Base;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels;
 
 namespace BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels
 {
@@ -16,14 +16,19 @@ namespace BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels
             set => SetAndNotifyIfChanged(ref dataTypeCollectionViewModel, value);
         }
 
-        public MonsterInSummonDataHeaderViewModel(MemoryAccessor memoryAccessor)
+        public MonsterInSummonDataHeaderViewModel(MemoryAccessor memoryAccessor) : base(memoryAccessor)
         {
-            DataTypeCollectionViewModel = new ObservableCollection<MonsterInSummonDataViewModel>();
-            for (int index = 0; index < memoryAccessor.MonstersInSummon.Length; index++)
-            {
-                ref var data = ref memoryAccessor.MonstersInSummon[index];
-                DataTypeCollectionViewModel.Add(new MonsterInSummonDataViewModel(ref data, memoryAccessor, data.GetAddress(index)));
-            }
+            //DataTypeCollectionViewModel = new ObservableCollection<MonsterInSummonDataViewModel>();
+            //for (int index = 0; index < memoryAccessor.MonstersInSummon.Length; index++)
+            //{
+            //    ref var data = ref memoryAccessor.MonstersInSummon[index];
+            //    DataTypeCollectionViewModel.Add(new MonsterInSummonDataViewModel(ref data, memoryAccessor, data.GetAddress(index)));
+            //}
+        }
+
+        public override void SetAccessor()
+        {
+            //memoryAccessor.MonstersInSummon = DataTypeCollectionViewModel.Select(a => a.MonsterInSummonData).ToArray();
         }
     }
 }

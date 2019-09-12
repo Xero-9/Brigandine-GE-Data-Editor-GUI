@@ -1,58 +1,32 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models.Base
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base
 {
 
     public class Command : ICommand
     {
-        Action _TargetExecuteMethod;
-        Func<bool> _TargetCanExecuteMethod;
+        readonly Action targetExecuteMethod;
+        readonly Func<bool> targetCanExecuteMethod;
 
-        public Command(Action executeMethod)
-        {
-            _TargetExecuteMethod = executeMethod;
-        }
+        public Command(Action executeMethod) => targetExecuteMethod = executeMethod;
 
         public Command(Action executeMethod, Func<bool> canExecuteMethod)
         {
-            _TargetExecuteMethod = executeMethod;
-            _TargetCanExecuteMethod = canExecuteMethod;
+            targetExecuteMethod = executeMethod;
+            targetCanExecuteMethod = canExecuteMethod;
         }
 
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged(this, EventArgs.Empty);
-        }
+        public void RaiseCanExecuteChanged() => CanExecuteChanged(this, EventArgs.Empty);
 
-        bool ICommand.CanExecute(object parameter)
-        {
+        bool ICommand.CanExecute(object parameter) => targetCanExecuteMethod?.Invoke() ?? targetExecuteMethod != null;
 
-            if (_TargetCanExecuteMethod != null)
-            {
-                return _TargetCanExecuteMethod();
-            }
-
-            if (_TargetExecuteMethod != null)
-            {
-                return true;
-            }
-
-            return false;
-        }
-		
-      // Beware - should use weak references if command instance lifetime 
+        // Beware - should use weak references if command instance lifetime 
       //   is longer than lifetime of UI objects that get hooked up to command
  
       // Prism commands solve this in their implementation 
         public event EventHandler CanExecuteChanged = delegate { };
 
-        void ICommand.Execute(object parameter)
-        {
-            if (_TargetExecuteMethod != null)
-            {
-                _TargetExecuteMethod();
-            }
-        }
+        void ICommand.Execute(object parameter) => targetExecuteMethod?.Invoke();
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using BrigandineGEDataEditor;
 using BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels.Base;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels;
 
 namespace BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels
 {
@@ -15,7 +16,7 @@ namespace BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels
             set => SetAndNotifyIfChanged(ref dataTypeCollectionViewModel, value);
         }
 
-        public SkillDataHeaderViewModel(MemoryAccessor memoryAccessor)
+        public SkillDataHeaderViewModel(MemoryAccessor memoryAccessor) : base(memoryAccessor)
         {
             DataTypeCollectionViewModel = new ObservableCollection<SkillDataViewModel>();
             for (int index = 0; index < memoryAccessor.Skills.Length; index++)
@@ -24,5 +25,6 @@ namespace BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels
                 DataTypeCollectionViewModel.Add(new SkillDataViewModel(ref data, memoryAccessor, data.GetAddress(index)));
             }
         }
+        public override void SetAccessor() => MemoryAccessor.Skills = DataTypeCollectionViewModel.Select(a => a.SkillData).ToArray();
     }
 }

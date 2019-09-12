@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
-             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
              xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
              xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
+             xmlns:dataTypeViewModels = "clr-namespace:BrigandineGEDataEditorGUI.Data_Type_ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -18,16 +17,16 @@
                 <DataGridTextColumn Header="Address" Binding="{Binding Address, StringFormat=X}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                <DataGridTextColumn Header="MPCost" Binding="{Binding MPCost}" />
+                <DataGridTextColumn Header="MPCost" Binding="{Binding MpCost}" />
                 <DataGridTextColumn Header="Range" Binding="{Binding Range}" />
                 <DataGridTextColumn Header="Damage" Binding="{Binding Damage}" />
                 <DataGridTextColumn Header="Elements" Binding="{Binding Elements}" />
                 <DataGridTextColumn Header="GroundAndSky" Binding="{Binding GroundAndSky}" />
                 <DataGridTextColumn Header="Unknown1" Binding="{Binding Unknown1}" />
-                <DataGridTextColumn Header="AOE" Binding="{Binding AOE}" />
+                <DataGridTextColumn Header="AOE" Binding="{Binding Aoe}" />
                 <DataGridTemplateColumn Header="Unknown">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType = "dataTypeViewModels:SpellDataViewModel" >
                             <ListView ItemsSource="{Binding Unknown}" >
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>

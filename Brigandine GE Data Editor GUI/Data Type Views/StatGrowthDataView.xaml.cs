@@ -1,15 +1,10 @@
-﻿using System.Windows.Controls;
-
-namespace BrigandineGEDataEditorGUI.Data_Type_Views
+﻿namespace BrigandineGEDataEditorGUI.Data_Type_Views
 {
     /// <summary>
     /// Interaction logic for StatGrowthDataView.xaml
     /// </summary>
-    public partial class StatGrowthDataView : UserControl
+    public partial class StatGrowthDataView
     {
-        public StatGrowthDataView()
-        {
-            InitializeComponent();
-        }
+        public StatGrowthDataView() => InitializeComponent();
     }
 }

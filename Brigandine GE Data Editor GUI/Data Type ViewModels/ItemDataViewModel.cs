@@ -1,16 +1,13 @@
 ﻿using BrigandineGEDataEditor;
 using BrigandineGEDataEditor.DataTypes;
 using BrigandineGEDataEditor.Enums;
-using BrigandineGEDataEditorGUI.Data_Type_View_Models.Base;
+using BrigandineGEDataEditorGUI.Data_Type_ViewModels.Base;
 
-namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
+namespace BrigandineGEDataEditorGUI.Data_Type_ViewModels
 {
     public class ItemDataViewModel : BaseDataTypeViewModel
     {
-        public ItemDataViewModel ()
-        {
-            itemData.Type = ItemTypeEnum.Amulet;
-        }
+        public ItemDataViewModel() => itemData.Type = ItemTypeEnum.Amulet;
         public ItemDataViewModel (ref ItemData data, MemoryAccessor memoryAccessor, int address)
         {
             Address = address;
@@ -18,20 +15,13 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             this.memoryAccessor = memoryAccessor;
         }
 
-        private MemoryAccessor memoryAccessor;
+        private readonly MemoryAccessor memoryAccessor;
         private ItemData itemData;
-
-        public override string ToString()
-        {
-            return Name;
-        }
+        public ref ItemData ItemData => ref itemData;
+        public override string ToString() => Name;
 
         //TODO Create special string like control type for handling getting and setting strings from memory accessor.
-        public string Name
-        {
-            get => $"{memoryAccessor.DereferenceString(itemData.Name)}";
-            //set => SetAndNotifyIfChanged(ref attacks.Name, value);
-        }
+        public string Name => $"{memoryAccessor.DereferenceString(itemData.Name)}";
         public string NameWithAddress => $"{Name}  at {MemoryAccessor.AdjustAddress(itemData.Name):X}";
         public ItemTypeEnum Type
         {
@@ -69,13 +59,13 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref itemData.Def_ShieldBlock, value);
         }
 
-        public byte HP
+        public byte Hp
         {
             get => itemData.HP;
             set => SetAndNotifyIfChanged(ref itemData.HP, value);
         }
 
-        public byte MP
+        public byte Mp
         {
             get => itemData.MP;
             set => SetAndNotifyIfChanged(ref itemData.MP, value);
@@ -99,18 +89,9 @@ namespace BrigandineGEDataEditorGUI.Data_Type_View_Models
             set => SetAndNotifyIfChanged(ref itemData.RuneArea, value);
         }
 
-        public Elements AttackElements
-        {
-            get => itemData.AtkElement.GetElements();
-            //set => SetAndNotifyIfChanged(ref itemData.AtkElement, value);
-        }
+        public Elements AttackElements => itemData.AtkElement.GetElements();
 
-        public Elements ResistElements
-        {
-            get => itemData.ResistElement.GetElements();
-            //set => SetAndNotifyIfChanged(ref itemData.ResistElement, value);
-        }
-
+        public Elements ResistElements => itemData.ResistElement.GetElements();
         public override int Address { get; }
     }
 }

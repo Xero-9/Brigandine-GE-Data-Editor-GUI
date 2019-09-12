@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:brigandineGeDataEditorGui="clr-namespace:BrigandineGEDataEditorGUI"
              xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
+             xmlns:dataTypeViewModels = "clr-namespace:BrigandineGEDataEditorGUI.Data_Type_ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -16,7 +17,7 @@
                 <DataGridTextColumn Header="Address" Binding="{Binding Address, StringFormat=X}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                <DataGridTextColumn Header="MP" Binding="{Binding MP}" />
+                <DataGridTextColumn Header="MP" Binding="{Binding Mp}" />
                 <DataGridTextColumn Header="Range" Binding="{Binding Range}" />
                 <DataGridTextColumn Header="Damage" Binding="{Binding Damage}" />
                 <DataGridTextColumn Header="Unknown1" Binding="{Binding Unknown1}" />
@@ -24,7 +25,7 @@
                 <DataGridTextColumn Header="GroundOrSky" Binding="{Binding GroundOrSky}" />
                 <DataGridTemplateColumn Header="Unknown">
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
+                        <DataTemplate DataType = "dataTypeViewModels:SpecialAttackDataViewModel" >
                             <ListView ItemsSource="{Binding Unknown}" >
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>

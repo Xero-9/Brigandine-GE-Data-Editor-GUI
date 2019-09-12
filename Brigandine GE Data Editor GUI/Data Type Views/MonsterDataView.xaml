@@ -3,8 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dataTypeViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_View_Models"
-             xmlns:dataTypeViews="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Views"
              xmlns:brigandineGeDataEditorGui = "clr-namespace:BrigandineGEDataEditorGUI"
              xmlns:dataTypeHeaderViewModels="clr-namespace:BrigandineGEDataEditorGUI.Data_Type_Header_ViewModels"
              mc:Ignorable="d" 
@@ -21,11 +19,11 @@
                 <DataGridTextColumn Header="MonsterSlotNumber" Binding="{Binding MonsterSlotNumber}" />
                 <DataGridTextColumn Header="Class" Binding="{Binding Class}" />
                 <DataGridTextColumn Header="Level" Binding="{Binding Level}" />
-                <DataGridTextColumn Header="HP" Binding="{Binding HP}" />
-                <DataGridTextColumn Header="MP" Binding="{Binding MP}" />
-                <DataGridTextColumn Header="STR" Binding="{Binding STR}" />
-                <DataGridTextColumn Header="INT" Binding="{Binding INT}" />
-                <DataGridTextColumn Header="AGI" Binding="{Binding AGI}" />
+                <DataGridTextColumn Header="HP" Binding="{Binding Hp}" />
+                <DataGridTextColumn Header="MP" Binding="{Binding Mp}" />
+                <DataGridTextColumn Header="STR" Binding="{Binding Str}" />
+                <DataGridTextColumn Header="INT" Binding="{Binding Int}" />
+                <DataGridTextColumn Header="AGI" Binding="{Binding Agi}" />
                 <DataGridTextColumn Header="ItemEquipped" Binding="{Binding ItemEquipped}" />
             </DataGrid.Columns>
         </DataGrid>
